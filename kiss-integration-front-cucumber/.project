@@ -2,7 +2,9 @@
 <projectDescription>
   <name>kiss-integration-front-cucumber</name>
   <comment>Validation des interfaces de la boutique Canal en utilisant Selenium WebDriver et Java Cucumber BDD. NO_M2ECLIPSE_SUPPORT: Project files created with the maven-eclipse-plugin are not supported in M2Eclipse.</comment>
-  <projects/>
+  <projects>
+    <project>kiss-integration-front-common</project>
+  </projects>
   <buildSpec>
     <buildCommand>
       <name>org.eclipse.jdt.core.javabuilder</name>

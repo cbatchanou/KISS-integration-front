@@ -15,21 +15,16 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.AbstractEnvironment;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.MapPropertySource;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
-import com.browserstack.local.Local;
 
 @Configuration
 @ComponentScan(basePackageClasses = ModuleConfig.class)
@@ -43,11 +38,11 @@ public class ModuleConfig {
 	@Autowired
 	private Environment environment;
 
-	/*@Bean(name = "chromeDriver")
+	@Bean(name = "chromeDriver")
 	public WebDriver chromeDriver() throws URISyntaxException {
 		System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
 		return new ChromeDriver();
-	}*/
+	}
 
 	@Bean(name = "browserStackLocalDriver")
 	public WebDriver browserStackLocalDriver() {

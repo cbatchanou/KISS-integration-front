@@ -61,15 +61,6 @@ public class SouscriptionStep extends BaseIntegration {
 		assertEquals("MyCanal - Souscrire - Matériel", browserStackLocaldriver.getTitle());
 	}
 
-	/*
-	 * @Lorsque("^L'on clique sur materiel bbox$") public void
-	 * click_sur_materiel_bbox() throws InterruptedException, IOException {
-	 * driver.findElement(By.xpath(bbox)).click(); Thread.sleep(5000); }
-	 * 
-	 * @Lorsque("^L'on clique sur materiel free$") public void
-	 * click_sur_materiel_free() throws InterruptedException, IOException {
-	 * driver.findElement(By.xpath(free)).click(); Thread.sleep(5000); }
-	 */
 	@Lorsque("^L'on clique sur materiel (.*?)$")
 	public void click_sur_materiel(@Transform(OperateurTransformer.class) OperateurEnum operateurEnum)
 			throws InterruptedException, IOException {
@@ -77,19 +68,7 @@ public class SouscriptionStep extends BaseIntegration {
 		Thread.sleep(5000);
 	}
 
-	/*
-	 * @Lorsque("^L'on clique sur materiel sfr$") public void
-	 * click_sur_materiel_sfr() throws InterruptedException, IOException {
-	 * driver.findElement(By.xpath(sfr)).click(); Thread.sleep(5000); }
-	 * 
-	 * @Lorsque("^L'on clique sur materiel numericable$") public void
-	 * click_sur_materiel_numericable() throws InterruptedException, IOException {
-	 * driver.findElement(By.xpath(numericable)).click(); Thread.sleep(5000); }
-	 * 
-	 * @Lorsque("^L'on clique sur materiel autre$") public void
-	 * click_sur_materiel_autre() throws InterruptedException, IOException {
-	 * driver.findElement(By.xpath(autre)).click(); Thread.sleep(5000); }
-	 */
+	 
 	@Lorsque("^L'on clique sur materiel smartTV$")
 	public void click_sur_materiel_smartTV() throws InterruptedException, IOException {
 		browserStackLocaldriver.findElement(By.xpath(smartTV)).click();

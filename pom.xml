@@ -55,6 +55,20 @@
 		</profile>
 	</profiles>
 
+	<repositories>
+		<repository>
+			<id>sonatype-nexus-snapshots</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>sonatype-nexus-snapshots</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</pluginRepository>
+	</pluginRepositories>
+
 	<build>
 
 		<pluginManagement>
@@ -77,6 +91,17 @@
 		</pluginManagement>
 
 		<plugins>
+			<plugin>
+				<groupId>com.browserstack</groupId>
+				<artifactId>automate-maven-plugin</artifactId>
+				<version>0.7.2-SNAPSHOT</version>
+				<configuration>
+					<source>1.8.0_151</source>
+					<target>1.8.0_151</target>
+					<complianceLevel>1.8.0_151</complianceLevel>
+				</configuration>
+			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -109,6 +134,13 @@
 
 	<dependencyManagement>
 		<dependencies>
+		
+			<dependency>
+				<groupId>com.browserstack</groupId>
+				<artifactId>automate-testassist</artifactId>
+				<version>0.7.2-SNAPSHOT</version>
+			</dependency>
+			
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-context</artifactId>
