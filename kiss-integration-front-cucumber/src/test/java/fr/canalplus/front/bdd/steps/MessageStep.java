@@ -13,7 +13,7 @@ import fr.canalplus.front.bdd.steps.base.BaseIntegration;
  *
  */
 public class MessageStep extends BaseIntegration{
-	private static final Logger LOGGER = (Logger) LoggerFactory.getLogger(MessageStep.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(MessageStep.class);
 	
 	public void CiviliteInvalide() {}
 	

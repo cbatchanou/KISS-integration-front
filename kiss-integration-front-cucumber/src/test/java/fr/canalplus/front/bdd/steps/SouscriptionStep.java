@@ -1,20 +1,13 @@
 package fr.canalplus.front.bdd.steps;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.Properties;
-
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.test.annotation.Timed;
 import org.testng.annotations.BeforeSuite;
 import cucumber.api.java.fr.Et;
 import cucumber.api.Transform;
@@ -26,7 +19,7 @@ import fr.canalplus.front.bdd.transformer.OperateurTransformer;
 import fr.canalplus.integration.common.enums.OperateurEnum;
 
 public class SouscriptionStep extends BaseIntegration {
-	private static final Logger LOGGER = (Logger) LoggerFactory.getLogger(SouscriptionStep.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(SouscriptionStep.class);
 
 	@BeforeSuite
 	public void setUp() throws URISyntaxException {

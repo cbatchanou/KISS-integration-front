@@ -9,10 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.AbstractApplicationContext;
-
 import cucumber.api.Transform;
-import cucumber.api.java.After;
 import cucumber.api.java.fr.Alors;
 import cucumber.api.java.fr.Et;
 import fr.canalplus.front.bdd.DBConfig;
@@ -27,7 +24,7 @@ import fr.canalplus.integration.common.services.interfaces.SubscriberService;
 import net.serenitybdd.core.annotations.findby.By;
 
 public class FormStep extends BaseIntegration {
-	private static final Logger LOGGER = (Logger) LoggerFactory.getLogger(FormStep.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(FormStep.class);
 	
 	private static final String REF_ORANGE = "33RZ1";
 	private static final String REF_SFR = "081FF2";
@@ -58,89 +55,89 @@ public class FormStep extends BaseIntegration {
 	
 	public void inputCivility(Integer civility) {
 		if(civility == 1) { 
-			browserStackLocaldriver.findElement(By.xpath(civilityM)).click();
+			browserStackLocaldriver.findElement(org.openqa.selenium.By.xpath(civilityM)).click();
 		}
-		else browserStackLocaldriver.findElement(By.xpath(civilityF)).click();
+		else browserStackLocaldriver.findElement(org.openqa.selenium.By.xpath(civilityF)).click();
 	}
 
 	public void inputName(String name) {
-		browserStackLocaldriver.findElement(By.id("name")).clear();
-		browserStackLocaldriver.findElement(By.id("name")).sendKeys(name);
+		browserStackLocaldriver.findElement(org.openqa.selenium.By.id("name")).clear();
+		browserStackLocaldriver.findElement(org.openqa.selenium.By.id("name")).sendKeys(name);
 	}
 
 	public void inputLastName(String lastName) {
-		browserStackLocaldriver.findElement(By.id("lastName")).clear();
-		browserStackLocaldriver.findElement(By.id("lastName")).sendKeys(lastName);
+		browserStackLocaldriver.findElement(org.openqa.selenium.By.id("lastName")).clear();
+		browserStackLocaldriver.findElement(org.openqa.selenium.By.id("lastName")).sendKeys(lastName);
 	}
 
 	public void inputFirstName(String firstName) {
-		browserStackLocaldriver.findElement(By.id("firstName")).clear();
-		browserStackLocaldriver.findElement(By.id("firstName")).sendKeys(firstName);
+		browserStackLocaldriver.findElement(org.openqa.selenium.By.id("firstName")).clear();
+		browserStackLocaldriver.findElement(org.openqa.selenium.By.id("firstName")).sendKeys(firstName);
 	}
 
 	public void inputZipCode(Integer zipCode) {
-		browserStackLocaldriver.findElement(By.name("zipCode")).clear();
-		browserStackLocaldriver.findElement(By.name("zipCode")).sendKeys(zipCode.toString());
+		browserStackLocaldriver.findElement(org.openqa.selenium.By.name("zipCode")).clear();
+		browserStackLocaldriver.findElement(org.openqa.selenium.By.name("zipCode")).sendKeys(zipCode.toString());
 	}
 
 	public void inputAdress(String streetName) {
-		browserStackLocaldriver.findElement(By.id("streetName")).clear();
-		browserStackLocaldriver.findElement(By.id("streetName")).sendKeys(streetName);
+		browserStackLocaldriver.findElement(org.openqa.selenium.By.id("streetName")).clear();
+		browserStackLocaldriver.findElement(org.openqa.selenium.By.id("streetName")).sendKeys(streetName);
 	}
 
 	// TELEPHONE FIXE
 	public void inputPhone(String phone) {
-		browserStackLocaldriver.findElement(By.id("phone")).clear();
-		browserStackLocaldriver.findElement(By.id("phone")).sendKeys(phone);
+		browserStackLocaldriver.findElement(org.openqa.selenium.By.id("phone")).clear();
+		browserStackLocaldriver.findElement(org.openqa.selenium.By.id("phone")).sendKeys(phone);
 	}
 
 	public void inputMobile(String phone) {
-		browserStackLocaldriver.findElement(By.id("mobile")).clear();
-		browserStackLocaldriver.findElement(By.id("mobile")).sendKeys(phone);
+		browserStackLocaldriver.findElement(org.openqa.selenium.By.id("mobile")).clear();
+		browserStackLocaldriver.findElement(org.openqa.selenium.By.id("mobile")).sendKeys(phone);
 	}
 
 	public void inputEmail(String email) {
-		browserStackLocaldriver.findElement(By.id("email")).clear();
-		browserStackLocaldriver.findElement(By.id("email")).sendKeys(email);
+		browserStackLocaldriver.findElement(org.openqa.selenium.By.id("email")).clear();
+		browserStackLocaldriver.findElement(org.openqa.selenium.By.id("email")).sendKeys(email);
 	}
 
 	public void inputPassword(String password) {
-		browserStackLocaldriver.findElement(By.id("password")).clear();
-		browserStackLocaldriver.findElement(By.id("password")).sendKeys(password);
+		browserStackLocaldriver.findElement(org.openqa.selenium.By.id("password")).clear();
+		browserStackLocaldriver.findElement(org.openqa.selenium.By.id("password")).sendKeys(password);
 	}
 
 	public void inputMaterial(String numMaterial) {
-		browserStackLocaldriver.findElement(By.id("equipmentId")).clear();
-		browserStackLocaldriver.findElement(By.id("equipmentId")).sendKeys(numMaterial);
+		browserStackLocaldriver.findElement(org.openqa.selenium.By.id("equipmentId")).clear();
+		browserStackLocaldriver.findElement(org.openqa.selenium.By.id("equipmentId")).sendKeys(numMaterial);
 	}
 
 	@Et("^Que l'on renseigne les champs nom et téléphone$")
 	public void input_name_and_phone() {
 		System.out.println("je suis dans le formulaire");
-		Subscriber subscriber = ((SubscriberService) subscriberContext()).find(10214344);
+		Subscriber subscriber = subscriberContext().find(10214344);
 		inputName(subscriber.getNom());
 		inputPhone(subscriber.getPhone());
 	}
 	@Et("^Que l'on verifie les messages d'erreurs affichés du nom invalide et du téléphone invalide$")
 	public void nom_et_telephone_invalides() throws InterruptedException {
 		System.out.println("je suis dans le formulaire");
-		Subscriber subscriber = ((SubscriberService) subscriberContext()).find(10214344);
+		Subscriber subscriber = subscriberContext().find(10214344);
 		inputName(getPassword()); inputPhone(getString());
 		valider_le_formulaire();
-		assertEquals("Veuillez saisir un nom valide", browserStackLocaldriver.findElement(By.xpath("//div[1]/div[3]/p[1]")).getText());
-		assertEquals("Veuillez saisir un numéro de téléphone valide", browserStackLocaldriver.findElement(By.xpath("//div[1]/div[3]/p[2]")).getText());
+		assertEquals("Veuillez saisir un nom valide", browserStackLocaldriver.findElement(org.openqa.selenium.By.xpath("//div[1]/div[3]/p[1]")).getText());
+		assertEquals("Veuillez saisir un numéro de téléphone valide", browserStackLocaldriver.findElement(org.openqa.selenium.By.xpath("//div[1]/div[3]/p[2]")).getText());
 		
 		inputName(subscriber.getNom());
 		valider_le_formulaire();
-		assertEquals("Veuillez saisir un numéro de téléphone valide", browserStackLocaldriver.findElement(By.xpath("//div[1]/div[3]/p[2]")).getText());
+		assertEquals("Veuillez saisir un numéro de téléphone valide", browserStackLocaldriver.findElement(org.openqa.selenium.By.xpath("//div[1]/div[3]/p[2]")).getText());
 		
 		inputName(getPassword()); inputPhone(subscriber.getPhone());
 		valider_le_formulaire();
-		assertEquals("Veuillez saisir un nom valide", browserStackLocaldriver.findElement(By.xpath("//div[1]/div[3]/p[1]")).getText());
+		assertEquals("Veuillez saisir un nom valide", browserStackLocaldriver.findElement(org.openqa.selenium.By.xpath("//div[1]/div[3]/p[1]")).getText());
 	}
 	
 	public void hitbox() {
-		assertTrue(isElementPresent(By.cssSelector("tooltip-hitbix-info")));
+		assertTrue(isElementPresent(org.openqa.selenium.By.cssSelector("tooltip-hitbix-info")));
 	}
 
 	@Et("^Que l'on renseigne le numéro de matériel (.*?)$")
@@ -172,18 +169,18 @@ public class FormStep extends BaseIntegration {
 
 	@Alors("^Valider donc le formulaire$")
 	public void valider_le_formulaire() {
-		browserStackLocaldriver.findElement(By.cssSelector(continuer)).click();
-		waitForElementIsInvisible(By.cssSelector("div[class='bubblingG']"));
+		browserStackLocaldriver.findElement(org.openqa.selenium.By.cssSelector(continuer)).click();
+		waitForElementIsInvisible(org.openqa.selenium.By.cssSelector("div[class='bubblingG']"));
 	}
 
 	public void click_sur_conditionsGenerales(String selector) {
-		WebElement element = browserStackLocaldriver.findElement(By.xpath(selector));
+		WebElement element = browserStackLocaldriver.findElement(org.openqa.selenium.By.xpath(selector));
 		Actions clickerConditions = new Actions(browserStackLocaldriver);
 		clickerConditions.moveToElement(element, 0, 0).click().perform();
 	}
 	
 	public void click_sur_identifiez_vous() {
-		browserStackLocaldriver.findElement(By.linkText("Identifiez-vous")).click();
+		browserStackLocaldriver.findElement(org.openqa.selenium.By.linkText("Identifiez-vous")).click();
 	}
 	
 	public void verification_elements_presents() {
@@ -192,7 +189,7 @@ public class FormStep extends BaseIntegration {
 
 	@Alors("^Remplir tous les champs du formulaire$")
 	public void formulaireCreationDeCompte() {
-		Subscriber subscriber = ((SubscriberService) subscriberContext()).find(10214344);
+		Subscriber subscriber = subscriberContext().find(10214344);
 		inputCivility(subscriber.getCivility());
 		inputLastName(subscriber.getPrenom());
 		inputFirstName(subscriber.getNom());

@@ -2,21 +2,12 @@ package fr.canalplus.front.bdd.steps.base;
 
 import java.net.URL;
 import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Properties;
-
-import javax.annotation.Resource;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.jmx.export.annotation.ManagedResource;
-
 import net.thucydides.core.util.EnvironmentVariables;
 import net.thucydides.core.util.SystemEnvironmentVariables;
-import net.thucydides.core.webdriver.DriverSource;
 
 @PropertySource("classpath:configurations/browserstack.properties")
 public class BrowserstackSerenityDriver {

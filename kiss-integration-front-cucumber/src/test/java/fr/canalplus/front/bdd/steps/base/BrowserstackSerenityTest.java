@@ -5,11 +5,8 @@ import java.util.Map;
 import org.apache.commons.collections4.map.HashedMap;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
-import org.springframework.test.context.ContextConfiguration;
-
 import com.browserstack.local.Local;
 
-import fr.canalplus.front.bdd.ModuleConfig;
 import net.thucydides.core.util.EnvironmentVariables;
 import net.thucydides.core.util.SystemEnvironmentVariables;
 

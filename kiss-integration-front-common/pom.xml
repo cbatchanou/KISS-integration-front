@@ -54,5 +54,12 @@
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc8</artifactId>
+			<version>${ojdbc.version}</version>
+		</dependency>
+		
 	</dependencies>
 </project>
