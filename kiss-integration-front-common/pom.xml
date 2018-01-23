@@ -55,11 +55,11 @@
 			<artifactId>logback-classic</artifactId>
 		</dependency>
 		
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.oracle</groupId>
 			<artifactId>ojdbc8</artifactId>
 			<version>${ojdbc.version}</version>
-		</dependency>
+		</dependency> -->
 		
 	</dependencies>
 </project>
