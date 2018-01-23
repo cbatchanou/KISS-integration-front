@@ -11,7 +11,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import fr.canalplus.integration.common.beans.entities.MaterialNumber;
-import fr.canalplus.integration.common.beans.entities.Subscriber;
 import fr.canalplus.integration.common.services.interfaces.MaterialNumberDao;
 
 @Repository

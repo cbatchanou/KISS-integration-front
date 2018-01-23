@@ -4,8 +4,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-import javax.sql.DataSource;
-
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -56,7 +54,7 @@ public class ModuleConfig {
 		Map<String, Object> map = displayAllProperties();
 
 		for (Map.Entry<String, Object> entry : map.entrySet()) {
-			String key = (String) entry.getKey();
+			String key = entry.getKey();
 
 			if (key.equals("capabilities.browserstack.local") || key.equals("capabilities.browserstack.debug")) {
 				capabilities.setCapability(key.replace("capabilities.", ""), (String) entry.getValue());

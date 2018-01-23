@@ -17,18 +17,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.ContextLoader;
-
-import cucumber.api.java.Before;
 import fr.canalplus.front.bdd.DBConfig;
 import fr.canalplus.front.bdd.ModuleConfig;
 
 @ContextConfiguration(classes = {ModuleConfig.class, DBConfig.class})
 public abstract class BaseIntegration {
-	private static final Logger LOGGER = (Logger)LoggerFactory.getLogger(BaseIntegration.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(BaseIntegration.class);
 
 	@Autowired
 	@Qualifier("browserStackLocalDriver")
