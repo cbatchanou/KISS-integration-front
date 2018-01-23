@@ -32,9 +32,9 @@ public abstract class BaseIntegration {
 	@Qualifier("browserStackLocalDriver")
 	public WebDriver browserStackLocaldriver;
 	
-	/*@Autowired
+	@Autowired
 	@Qualifier("chromeDriver")
-	public WebDriver driver;*/
+	public WebDriver driver;
 	
 	@Autowired
 	public URI siteCanal;
