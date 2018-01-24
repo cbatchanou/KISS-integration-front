@@ -38,7 +38,7 @@ public class ModuleConfig {
 
 	@Bean(name = "chromeDriver")
 	public WebDriver chromeDriver() throws URISyntaxException {
-		System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver");
 		return new ChromeDriver();
 	}
 
