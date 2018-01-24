@@ -18,12 +18,26 @@
 				<artifactId>automate-maven-plugin</artifactId>
 				<version>0.7.2-SNAPSHOT</version>
 				<configuration>
-					<source>1.8.0_151</source>
-					<target>1.8.0_151</target>
-					<complianceLevel>1.8.0_151</complianceLevel>
+					<source>1.8</source>
+					<target>1.8</target>
+					<complianceLevel>1.8</complianceLevel>
 				</configuration>
 			</plugin>
+
+			<!-- COMPILE -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin-version}</version>
+				<configuration>
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+
 		</plugins>
+
 	</build>
 	<dependencies>
 		<dependency>
@@ -51,15 +65,17 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-dbcp2</artifactId>
+		</dependency>
+		
+		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 		</dependency>
-		
-		<!-- <dependency>
-			<groupId>com.oracle</groupId>
-			<artifactId>ojdbc8</artifactId>
-			<version>${ojdbc.version}</version>
-		</dependency> -->
-		
+
+		<!-- <dependency> <groupId>com.oracle</groupId> <artifactId>ojdbc8</artifactId> 
+			<version>${ojdbc.version}</version> </dependency> -->
+
 	</dependencies>
 </project>

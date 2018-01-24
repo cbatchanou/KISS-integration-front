@@ -23,6 +23,9 @@
 		<serenity.cucumber.version>1.5.4</serenity.cucumber.version>
 	</properties>
 
+
+
+
 	<dependencies>
 		<dependency>
 			<groupId>com.browserstack</groupId>
@@ -102,6 +105,19 @@
 			<artifactId>serenity-junit</artifactId>
 			<version>${serenity.version}</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-collections4</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-dbcp2</artifactId>
+		</dependency>
+
+
+		<!-- SERENITY BDD REPORT -->
 		<dependency>
 			<groupId>net.serenity-bdd</groupId>
 			<artifactId>serenity-spring</artifactId>
@@ -117,11 +133,8 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<!-- <dependency>
-			<groupId>com.oracle</groupId>
-			<artifactId>ojdbc8</artifactId>
-			<version>${ojdbc.version}</version>
-		</dependency> -->
+		<!-- <dependency> <groupId>com.oracle</groupId> <artifactId>ojdbc8</artifactId> 
+			<version>${ojdbc.version}</version> </dependency> -->
 		<dependency>
 			<groupId>fr.canalplus.integration</groupId>
 			<artifactId>kiss-integration-front-common</artifactId>
@@ -139,6 +152,7 @@
 
 		<!-- Ne pas lancer les tests unitaires -->
 		<plugins>
+
 			<plugin>
 				<groupId>com.browserstack</groupId>
 				<artifactId>automate-maven-plugin</artifactId>
@@ -150,11 +164,32 @@
 				</configuration>
 				<executions>
 					<execution>
-						<goals>
-						</goals>
+						<!-- <goals> <goal>test-compile</goal> </goals> -->
 					</execution>
 				</executions>
 			</plugin>
+
+			<!-- REPORTING -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>properties-maven-plugin</artifactId>
+				<version>1.0.0</version>
+				<executions>
+					<execution>
+						<!-- <id>prepare-serenity</id> <phase>test-compile</phase> <goals> 
+							<goal>set-system-properties</goal> </goals> -->
+						<configuration>
+							<properties>
+								<property>
+									<name>properties</name>
+									<value>${serenity.properties}</value>
+								</property>
+							</properties>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
@@ -185,7 +220,8 @@
 					</execution>
 				</executions>
 			</plugin>
-
+			
+			<!-- COMPILE -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -221,6 +257,17 @@
 		</plugins>
 	</build>
 	<profiles>
+		<profile>
+			<id>all</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<test.runners>**/runners/*Test.java</test.runners>
+				<serenity.properties>serenity.properties</serenity.properties>
+			</properties>
+		</profile>
+
 		<profile>
 			<id>single</id>
 			<build>

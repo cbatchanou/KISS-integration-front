@@ -29,7 +29,7 @@ public class SouscriptionStep extends BaseIntegration {
 	@Etantdonné("^L'ouverture de la page souscription$")
 	public void open_the_Firefox_and_launch_the_application() throws InterruptedException {
 		getPageUrl();
-		Thread.sleep(1000);
+		Thread.sleep(3000);
 		assertEquals("MyCanal - Souscrire - Configuration matériel", browserStackLocaldriver.getTitle());
 
 	}

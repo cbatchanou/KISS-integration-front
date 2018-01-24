@@ -2,6 +2,7 @@ package fr.canalplus.front.bdd;
 
 import javax.sql.DataSource;
 
+import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -13,7 +14,6 @@ import org.springframework.context.annotation.PropertySources;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 
 @Configuration
@@ -29,7 +29,7 @@ public class DBConfig {
 	
 	@Bean(name = "CGADEV10")
 	public DataSource cgaDataSource() {
-		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+		BasicDataSource dataSource = new BasicDataSource();
 
 		dataSource.setDriverClassName(environment.getRequiredProperty("db.driver"));
 		dataSource.setUrl(environment.getRequiredProperty("db.cga.url"));
@@ -41,7 +41,7 @@ public class DBConfig {
 	
 	@Bean(name = "SGEWEB")
 	public DataSource sgeDataSource() {
-		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+		BasicDataSource dataSource = new BasicDataSource();
 
 		dataSource.setDriverClassName(environment.getRequiredProperty("db.driver"));
 		dataSource.setUrl(environment.getRequiredProperty("db.sge.url"));
