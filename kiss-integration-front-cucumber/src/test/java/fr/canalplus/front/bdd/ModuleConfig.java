@@ -38,11 +38,11 @@ public class ModuleConfig {
 	@Autowired
 	private Environment environment;
 
-	@Bean(name = "chromeDriver")
+	/*@Bean(name = "chromeDriver")
 	public WebDriver chromeDriver() throws URISyntaxException {
 		System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
 		return new ChromeDriver();
-	}
+	}*/
 
 	@Bean(name = "browserStackLocalDriver")
 	public WebDriver browserStackLocalDriver() {
