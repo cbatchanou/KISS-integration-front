@@ -164,9 +164,9 @@
 				</configuration>
 				<executions>
 					<execution>
-						<goals>
+						<!-- <goals>
 							<goal>test-compile</goal>
-						</goals>
+						</goals> -->
 					</execution>
 				</executions>
 			</plugin>
@@ -178,11 +178,11 @@
 				<version>1.0.0</version>
 				<executions>
 					<execution>
-						<id>prepare-serenity</id>
+						<!-- <id>prepare-serenity</id>
 						<phase>test-compile</phase>
 						<goals>
 							<goal>set-system-properties</goal>
-						</goals>
+						</goals> -->
 						<configuration>
 							<properties>
 								<property>

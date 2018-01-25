@@ -1,6 +1,10 @@
 #language: fr
 Fonctionnalité: Reset functionality on login page of Application
 
+  @test
+  Scénario: test de l'url
+    Etant donné L'ouverture de la page souscription
+
   Scénario: Scénario de vérification du lien : En savoir plus sur les décodeurs CANAL
     Etant donné L'ouverture de la page souscription
     Lorsque L'on clique sur en savoir plus sur les decodeurs canal
@@ -52,7 +56,3 @@ Fonctionnalité: Reset functionality on login page of Application
     Et Verification des elements presents dans soucription decodeurs canal
     Et L'on clique sur jai deja une parabole
     Alors Remplir tous les champs du formulaire
-
-  @test
-  Scénario: test de l'url
-    Etant donné L'ouverture de la page souscription

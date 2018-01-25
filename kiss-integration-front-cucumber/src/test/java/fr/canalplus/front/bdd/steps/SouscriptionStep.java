@@ -231,8 +231,6 @@ public class SouscriptionStep extends BaseIntegration {
 	public void verification_des_elements_dans_souscription_materiel_voirledetail() throws Exception {
 		assertTrue(isElementPresent(By.xpath("/html/body/div[2]/ui-view/subscription-full/footer-cart/section/div/a")));
 		assertTrue(isElementPresent(By.cssSelector("div.recap-products__container")));
-		assertEquals(recupere_prix_offre(),
-				browserStackLocaldriver.findElement(By.xpath("//recap-products/div[1]/div[2]/div/div[2]/span")).getText());
 		Thread.sleep(5000);
 		browserStackLocaldriver.navigate().back();
 	}

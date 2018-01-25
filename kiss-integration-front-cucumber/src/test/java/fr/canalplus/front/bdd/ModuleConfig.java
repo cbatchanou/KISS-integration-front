@@ -23,6 +23,8 @@ import org.springframework.core.env.AbstractEnvironment;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.MapPropertySource;
 
+import fr.canalplus.front.bdd.steps.base.BrowserstackSerenityDriver;
+
 
 @Configuration
 @ComponentScan(basePackageClasses = ModuleConfig.class)
@@ -38,43 +40,13 @@ public class ModuleConfig {
 
 	@Bean(name = "chromeDriver")
 	public WebDriver chromeDriver() throws URISyntaxException {
-		System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver");
+		System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
 		return new ChromeDriver();
 	}
 
 	@Bean(name = "browserStackLocalDriver")
 	public WebDriver browserStackLocalDriver() {
-		addProxy();
-
-		String username = environment.getProperty("browserstack.user");
-		String accessKey = environment.getProperty("browserstack.key");
-
-		String profil = System.getProperty("environment");
-		DesiredCapabilities capabilities = new DesiredCapabilities();
-		Map<String, Object> map = displayAllProperties();
-
-		for (Map.Entry<String, Object> entry : map.entrySet()) {
-			String key = entry.getKey();
-
-			if (key.equals("capabilities.browserstack.local") || key.equals("capabilities.browserstack.debug")) {
-				capabilities.setCapability(key.replace("capabilities.", ""), (String) entry.getValue());
-			} else if (key.startsWith("capabilities.browserstack.")) {
-				capabilities.setCapability(key.replace("capabilities.browserstack.", ""), (String) entry.getValue());
-			} else if (profil != null && key.startsWith("environment." + profil)) {
-				capabilities.setCapability(key.replace("environment." + profil + ".", ""), (String) entry.getValue());
-				if (key.equals("environment." + profil + ".browserstack.local")) {
-					System.setProperty(key.replace("environment." + profil + ".", ""), (String) entry.getValue());
-				}
-			}
-		}
-		System.setProperty("browserstack.local", "true");
-		try {
-			return new RemoteWebDriver(new URL("http://" + username + ":" + accessKey + "@"
-					+ environment.getProperty("browserstack.server") + "/wd/hub"), capabilities);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
+		return  (new BrowserstackSerenityDriver()).newDriver();
 	}
 
 	@Bean
