@@ -38,12 +38,6 @@ public class ModuleConfig {
 	@Autowired
 	private Environment environment;
 
-	/*@Bean(name = "chromeDriver")
-	public WebDriver chromeDriver() throws URISyntaxException {
-		System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
-		return new ChromeDriver();
-	}*/
-
 	@Bean(name = "browserStackLocalDriver")
 	public WebDriver browserStackLocalDriver() {
 		return  (new BrowserstackSerenityDriver()).newDriver();
@@ -52,13 +46,6 @@ public class ModuleConfig {
 	@Bean
 	public URI getSiteCanal() throws URISyntaxException {
 		return new URI(environment.getRequiredProperty("siteCanal.url"));
-	}
-
-	private void addProxy() {
-		System.getProperties().put("https.proxyHost", environment.getProperty("https.proxyHost"));
-		System.getProperties().put("https.proxyPort", environment.getProperty("https.proxyPort"));
-		System.getProperties().put("https.proxyUser", environment.getProperty("https.proxyUser"));
-		System.getProperties().put("https.proxyPassword", environment.getProperty("https.proxyPass"));
 	}
 
 	private Map<String, Object> displayAllProperties() {

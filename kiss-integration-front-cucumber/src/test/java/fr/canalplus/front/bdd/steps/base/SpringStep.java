@@ -17,7 +17,6 @@ public class SpringStep extends BaseIntegration{
 	@After
 	public void tearDown() throws Exception {
 		LOGGER.info("Closing drivers...");
-		if(driver != null)	driver.quit();
 		if(browserStackLocaldriver != null)	browserStackLocaldriver.quit();
 		if(context != null) context.close(); 
 	}

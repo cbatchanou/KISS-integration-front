@@ -30,10 +30,6 @@ public abstract class BaseIntegration {
 	public WebDriver browserStackLocaldriver;
 
 	@Autowired
-	@Qualifier("chromeDriver")
-	public WebDriver driver;
-
-	@Autowired
 	public URI siteCanal;
 
 	public static AbstractApplicationContext context;

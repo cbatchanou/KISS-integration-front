@@ -25,6 +25,7 @@ import org.springframework.context.annotation.PropertySource;
 
 import net.thucydides.core.util.EnvironmentVariables;
 import net.thucydides.core.util.SystemEnvironmentVariables;
+import net.thucydides.core.webdriver.WebdriverManager;
 
 @PropertySource("classpath:configurations/browserstack.properties")
 public class BrowserstackSerenityDriver {
@@ -109,7 +110,7 @@ public class BrowserstackSerenityDriver {
 
 		builder.setProxy(proxy);
 		builder.setDefaultCredentialsProvider(credsProvider);
-
+		
 		Factory factory = new MyHttpClientFactory(builder);
 		HttpCommandExecutor executor = new HttpCommandExecutor(new HashMap<String, CommandInfo>(), url, factory);
 		System.out.println("capabiblities: " + capability.toString());
