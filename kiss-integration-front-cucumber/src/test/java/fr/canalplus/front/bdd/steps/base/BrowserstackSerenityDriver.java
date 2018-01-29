@@ -34,6 +34,7 @@ public class BrowserstackSerenityDriver {
 		int proxyPort = 8080;
 		String proxyUserDomain = "cpgrp.root.local";
 		String proxyUser = environmentVariables.getProperty("https.proxyUser");
+		System.out.println("proxyuser"+proxyUser);
 		String proxyPassword = environmentVariables.getProperty("https.proxyPass");
 
 		String username = System.getenv("BROWSERSTACK_USERNAME");
@@ -59,15 +60,16 @@ public class BrowserstackSerenityDriver {
 		HttpHost proxy = new HttpHost(proxyHost, proxyPort);
 
 		CredentialsProvider credsProvider = new BasicCredentialsProvider();
-
+		System.out.println("getworstation:"+getWorkstation());
 		credsProvider.setCredentials(new AuthScope(proxyHost, proxyPort),
-				new NTCredentials(proxyUser, proxyPassword, getWorkstation(), proxyUserDomain));
+				new NTCredentials(proxyUser, proxyPassword, getWorkstation(), ""));
+		
 		System.out.println("credentialsProvider: " + credsProvider.toString());
-		if (url.getUserInfo() != null && !url.getUserInfo().isEmpty()) {
+		/*if (url.getUserInfo() != null && !url.getUserInfo().isEmpty()) {
 			credsProvider.setCredentials(
 					new AuthScope(url.getHost(), (url.getPort() > 0 ? url.getPort() : url.getDefaultPort())),
 					new UsernamePasswordCredentials(url.getUserInfo()));
-		}
+		}*/
 
 		builder.setProxy(proxy);
 		builder.setDefaultCredentialsProvider(credsProvider);
