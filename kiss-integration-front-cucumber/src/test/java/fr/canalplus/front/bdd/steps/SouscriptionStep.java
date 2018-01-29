@@ -23,7 +23,7 @@ public class SouscriptionStep extends BaseIntegration {
 
 	@BeforeSuite
 	public void setUp() throws URISyntaxException {
-		// setProperties();
+		
 	}
 
 	@Etantdonné("^L'ouverture de la page souscription$")
@@ -83,21 +83,18 @@ public class SouscriptionStep extends BaseIntegration {
 	@Lorsque("^L'on clique sur en savoir plus sur les decodeurs canal$")
 	public void en_savoir_sur_les_décodeurs_canal() throws InterruptedException, IOException {
 		browserStackLocaldriver.findElement(By.xpath(link_decodeur_canal)).click();
-		back_to_preview_page();
 		Thread.sleep(5000);
 	}
 
 	@Lorsque("^L'on clique sur voir les modalités de loffre et des services$")
 	public void voir_les_modalités_de_loffre_et_des_services() throws InterruptedException, IOException {
 		browserStackLocaldriver.findElement(By.xpath(link_modalite_offre)).click();
-
 		Thread.sleep(5000);
 	}
 
 	@Lorsque("^L'on clique sur en savoir plus sur les decodeurs compatibles$")
 	public void en_savoir_sur_les_décodeurs_compatibles() throws InterruptedException, IOException {
 		browserStackLocaldriver.findElement(By.xpath(link_decodeur_compatible)).click();
-		back_to_preview_page();
 		Thread.sleep(5000);
 	}
 

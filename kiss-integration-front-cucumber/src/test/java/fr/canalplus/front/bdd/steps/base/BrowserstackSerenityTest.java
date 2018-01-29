@@ -22,8 +22,8 @@ public class BrowserstackSerenityTest {
 		if (accessKey == null) {
 			accessKey = environmentVariables.getProperty("browserstack.key");
 		}
-		String proxyHost = environmentVariables.getProperty("https.proxyHost");
-		String proxyPort = environmentVariables.getProperty("https.proxyPort");
+		
+		
 		String environment = System.getProperty("environment");
 		String key = "browserstack.local";
 		boolean is_local = environmentVariables.getProperty(key) != null
@@ -38,8 +38,6 @@ public class BrowserstackSerenityTest {
 			bsLocal = new Local();
 			Map<String, String> bsLocalArgs = new HashedMap<String, String>();
 			bsLocalArgs.put("key", accessKey);
-			bsLocalArgs.put("proxyHost", proxyHost);
-			bsLocalArgs.put("proxyPort", proxyPort);
 			bsLocal.start(bsLocalArgs);
 		}
 	}

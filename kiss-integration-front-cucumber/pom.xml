@@ -23,38 +23,24 @@
 		<serenity.cucumber.version>1.5.4</serenity.cucumber.version>
 	</properties>
 
-
-
-
 	<dependencies>
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.browserstack</groupId>
 			<artifactId>automate-testassist</artifactId>
 			<version>0.7.2-SNAPSHOT</version>
-		</dependency>
+		</dependency> -->
 
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-jdbc</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-orm</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-
+	
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
@@ -70,7 +56,7 @@
 			<artifactId>testng</artifactId>
 			<version>${testng.version}</version>
 		</dependency>
-
+		
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
@@ -95,28 +81,13 @@
 			<artifactId>serenity-core</artifactId>
 			<version>${serenity.version}</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>net.serenity-bdd</groupId>
 			<artifactId>serenity-cucumber</artifactId>
 			<version>${serenity.cucumber.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>net.serenity-bdd</groupId>
-			<artifactId>serenity-junit</artifactId>
-			<version>${serenity.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-collections4</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-dbcp2</artifactId>
-		</dependency>
-
-
+		
 		<!-- SERENITY BDD REPORT -->
 		<dependency>
 			<groupId>net.serenity-bdd</groupId>
@@ -133,8 +104,48 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<!-- <dependency> <groupId>com.oracle</groupId> <artifactId>ojdbc8</artifactId> 
-			<version>${ojdbc.version}</version> </dependency> -->
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-dependencies</artifactId>
+			<version>${spring-boot.version}</version>
+			<type>pom</type>
+			<exclusions>
+				<exclusion>
+					<groupId>org.eclipse.jetty</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.eclipse.jetty.websocket</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>net.serenity-bdd</groupId>
+			<artifactId>serenity-junit</artifactId>
+			<version>${serenity.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>net.serenity-bdd</groupId>
+			<artifactId>serenity-rest-assured</artifactId>
+			<version>${serenity.version}</version>
+		</dependency>
+
 		<dependency>
 			<groupId>fr.canalplus.integration</groupId>
 			<artifactId>kiss-integration-front-common</artifactId>
@@ -152,50 +163,7 @@
 
 		<!-- Ne pas lancer les tests unitaires -->
 		<plugins>
-
-			<plugin>
-				<groupId>com.browserstack</groupId>
-				<artifactId>automate-maven-plugin</artifactId>
-				<version>0.7.2-SNAPSHOT</version>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-					<complianceLevel>1.8</complianceLevel>
-				</configuration>
-				<executions>
-					<execution>
-						<!-- <goals>
-							<goal>test-compile</goal>
-						</goals> -->
-					</execution>
-				</executions>
-			</plugin>
-
-			<!-- REPORTING -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>properties-maven-plugin</artifactId>
-				<version>1.0.0</version>
-				<executions>
-					<execution>
-						<!-- <id>prepare-serenity</id>
-						<phase>test-compile</phase>
-						<goals>
-							<goal>set-system-properties</goal>
-						</goals> -->
-						<configuration>
-							<properties>
-								<property>
-									<name>properties</name>
-									<value>${serenity.properties}</value>
-								</property>
-							</properties>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
+		<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>${maven-surefire-plugin.version}</version>
@@ -203,7 +171,18 @@
 					<skip>true</skip>
 				</configuration>
 			</plugin>
-
+			
+			<!-- COMPILE -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin-version}</version>
+				<configuration>
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.source}</target>
+				</configuration>
+			</plugin>
+			
 			<!-- Lancer les tests d'integration -->
 			<plugin>
 				<artifactId>maven-failsafe-plugin</artifactId>
@@ -225,18 +204,7 @@
 					</execution>
 				</executions>
 			</plugin>
-
-			<!-- COMPILE -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>${maven-compiler-plugin-version}</version>
-				<configuration>
-					<source>${maven.compiler.source}</source>
-					<target>${maven.compiler.source}</target>
-				</configuration>
-			</plugin>
-
+			
 			<!-- generation du rapport serenity -->
 			<plugin>
 				<groupId>net.serenity-bdd.maven.plugins</groupId>
@@ -259,20 +227,46 @@
 					</execution>
 				</executions>
 			</plugin>
+			
+			<plugin>
+				<groupId>com.browserstack</groupId>
+				<artifactId>automate-maven-plugin</artifactId>
+				<version>0.7.2-SNAPSHOT</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<complianceLevel>1.8</complianceLevel>
+				</configuration>
+				<executions>
+					<execution>
+						<!-- <goals> <goal>test-compile</goal> </goals> -->
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- REPORTING -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>properties-maven-plugin</artifactId>
+				<version>1.0.0</version>
+				<executions>
+					<execution>
+						<!-- <id>prepare-serenity</id> <phase>test-compile</phase> <goals> 
+							<goal>set-system-properties</goal> </goals> -->
+						<configuration>
+							<properties>
+								<property>
+									<name>properties</name>
+									<value>${serenity.properties}</value>
+								</property>
+							</properties>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 	<profiles>
-		<profile>
-			<id>all</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<properties>
-				<test.runners>**/runners/*Test.java</test.runners>
-				<serenity.properties>serenity.properties</serenity.properties>
-			</properties>
-		</profile>
-
 		<profile>
 			<id>single</id>
 			<build>

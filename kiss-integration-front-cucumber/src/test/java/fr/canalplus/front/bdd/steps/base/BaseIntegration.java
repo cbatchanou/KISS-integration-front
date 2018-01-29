@@ -16,14 +16,19 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
+
 import fr.canalplus.front.bdd.DBConfig;
 import fr.canalplus.front.bdd.ModuleConfig;
 
 @ContextConfiguration(classes = { ModuleConfig.class, DBConfig.class })
 public abstract class BaseIntegration {
-	private static final Logger LOGGER = LoggerFactory.getLogger(BaseIntegration.class);
 
 	@Autowired
 	@Qualifier("browserStackLocalDriver")
@@ -122,8 +127,9 @@ public abstract class BaseIntegration {
 	}
 
 	public void getPageUrl() {
+		browserStackLocaldriver.manage().deleteAllCookies();
 		browserStackLocaldriver.get(siteCanal.toString());
-		browserStackLocaldriver.navigate().to(siteCanal.toString());
+		browserStackLocaldriver.get("https://boutique-recette.mycanal.fr/souscrire/offre?propalId=000012242");
 		waitForElementIsInvisible(By.cssSelector("div[class='spinner']"));
 	}
 
