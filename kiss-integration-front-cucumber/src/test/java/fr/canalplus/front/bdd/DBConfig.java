@@ -19,9 +19,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 @Configuration
 @ComponentScan(basePackageClasses = DBConfig.class)
 @Import(fr.canalplus.integration.common.DBConfig.class)
-@PropertySources(value = { @PropertySource("classpath:configurations/connection.properties"),
-						   @PropertySource("classpath:configurations/browserstack.properties"),
-						   @PropertySource("classpath:configurations/stepMateriel.properties")})
+@PropertySource("classpath:configurations/connection.properties")
 public class DBConfig {
 	
 	@Autowired
@@ -64,8 +62,4 @@ public class DBConfig {
 		return jdbcTemplate;
 	}
 
-	@Bean
-	public static PropertySourcesPlaceholderConfigurer placeHolderCofigurer() {
-		return new PropertySourcesPlaceholderConfigurer();
-	}
 }

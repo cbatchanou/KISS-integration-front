@@ -21,51 +21,12 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.HttpCommandExecutor;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.http.HttpClient.Factory;
-import org.springframework.context.annotation.PropertySource;
 
 import net.thucydides.core.util.EnvironmentVariables;
 import net.thucydides.core.util.SystemEnvironmentVariables;
-import net.thucydides.core.webdriver.WebdriverManager;
 
-@PropertySource("classpath:configurations/browserstack.properties")
 public class BrowserstackSerenityDriver {
-
-	public WebDriver newDriver() {
-
-		EnvironmentVariables environmentVariables = SystemEnvironmentVariables.createEnvironmentVariables();
-		String environment = System.getProperty("environment");
-		DesiredCapabilities capabilities = new DesiredCapabilities();
-
-		Iterator it = environmentVariables.getKeys().iterator();
-		while (it.hasNext()) {
-			String key = (String) it.next();
-			System.out.println(key);
-			if (key.equals("browserstack.user") || key.equals("browserstack.key")
-					|| key.equals("browserstack.server")) {
-				continue;
-			} else if (key.startsWith("capabilities.browserstack.")) {
-				capabilities.setCapability(key.replace("capabilities.browserstack.", ""),
-						environmentVariables.getProperty(key));
-				if (key.equals("capabilities.browserstack.local")) {
-					System.setProperty(key, environmentVariables.getProperty(key));
-				}
-			} else if (environment != null && key.startsWith("environment." + environment)) {
-				capabilities.setCapability(key.replace("environment." + environment + ".", ""),
-						environmentVariables.getProperty(key));
-				if (key.equals("environment." + environment + ".browserstack.local")) {
-					System.setProperty(key.replace("environment." + environment + ".", ""),
-							environmentVariables.getProperty(key));
-				}
-			}
-		}
-		try {
-			return connectViaProxy(capabilities);
-		} catch (Exception e) {
-			System.out.println(e);
-			return null;
-		}
-	}
-
+	
 	public RemoteWebDriver connectViaProxy(DesiredCapabilities capability) {
 
 		EnvironmentVariables environmentVariables = SystemEnvironmentVariables.createEnvironmentVariables();
@@ -101,7 +62,7 @@ public class BrowserstackSerenityDriver {
 
 		credsProvider.setCredentials(new AuthScope(proxyHost, proxyPort),
 				new NTCredentials(proxyUser, proxyPassword, getWorkstation(), proxyUserDomain));
-		System.out.println("credentialsProvider: "+ credsProvider.toString());
+		System.out.println("credentialsProvider: " + credsProvider.toString());
 		if (url.getUserInfo() != null && !url.getUserInfo().isEmpty()) {
 			credsProvider.setCredentials(
 					new AuthScope(url.getHost(), (url.getPort() > 0 ? url.getPort() : url.getDefaultPort())),
@@ -110,14 +71,14 @@ public class BrowserstackSerenityDriver {
 
 		builder.setProxy(proxy);
 		builder.setDefaultCredentialsProvider(credsProvider);
-		
+
 		Factory factory = new MyHttpClientFactory(builder);
 		HttpCommandExecutor executor = new HttpCommandExecutor(new HashMap<String, CommandInfo>(), url, factory);
 		System.out.println("capabiblities: " + capability.toString());
 		return new RemoteWebDriver(executor, capability);
 	}
 
-	private String getWorkstation() {
+	private static String getWorkstation() {
 		Map<String, String> env = System.getenv();
 
 		if (env.containsKey("COMPUTERNAME")) {
@@ -135,4 +96,5 @@ public class BrowserstackSerenityDriver {
 			}
 		}
 	}
+
 }
