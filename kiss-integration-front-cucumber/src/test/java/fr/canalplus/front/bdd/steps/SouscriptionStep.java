@@ -23,13 +23,13 @@ public class SouscriptionStep extends BaseIntegration {
 
 	@BeforeSuite
 	public void setUp() throws URISyntaxException {
-		// setProperties();
+		
 	}
 
 	@Etantdonné("^L'ouverture de la page souscription$")
 	public void open_the_Firefox_and_launch_the_application() throws InterruptedException {
 		getPageUrl();
-		Thread.sleep(1000);
+		Thread.sleep(5000);
 		assertEquals("MyCanal - Souscrire - Configuration matériel", browserStackLocaldriver.getTitle());
 
 	}
@@ -83,21 +83,18 @@ public class SouscriptionStep extends BaseIntegration {
 	@Lorsque("^L'on clique sur en savoir plus sur les decodeurs canal$")
 	public void en_savoir_sur_les_décodeurs_canal() throws InterruptedException, IOException {
 		browserStackLocaldriver.findElement(By.xpath(link_decodeur_canal)).click();
-		back_to_preview_page();
 		Thread.sleep(5000);
 	}
 
 	@Lorsque("^L'on clique sur voir les modalités de loffre et des services$")
 	public void voir_les_modalités_de_loffre_et_des_services() throws InterruptedException, IOException {
 		browserStackLocaldriver.findElement(By.xpath(link_modalite_offre)).click();
-
 		Thread.sleep(5000);
 	}
 
 	@Lorsque("^L'on clique sur en savoir plus sur les decodeurs compatibles$")
 	public void en_savoir_sur_les_décodeurs_compatibles() throws InterruptedException, IOException {
 		browserStackLocaldriver.findElement(By.xpath(link_decodeur_compatible)).click();
-		back_to_preview_page();
 		Thread.sleep(5000);
 	}
 
@@ -231,8 +228,6 @@ public class SouscriptionStep extends BaseIntegration {
 	public void verification_des_elements_dans_souscription_materiel_voirledetail() throws Exception {
 		assertTrue(isElementPresent(By.xpath("/html/body/div[2]/ui-view/subscription-full/footer-cart/section/div/a")));
 		assertTrue(isElementPresent(By.cssSelector("div.recap-products__container")));
-		assertEquals(recupere_prix_offre(),
-				browserStackLocaldriver.findElement(By.xpath("//recap-products/div[1]/div[2]/div/div[2]/span")).getText());
 		Thread.sleep(5000);
 		browserStackLocaldriver.navigate().back();
 	}

@@ -20,19 +20,21 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-context/4.3.12.RELEASE/spring-context-4.3.12.RELEASE.jar" sourcepath="M2_REPO/org/springframework/spring-context/4.3.12.RELEASE/spring-context-4.3.12.RELEASE-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-aop/4.3.12.RELEASE/spring-aop-4.3.12.RELEASE.jar" sourcepath="M2_REPO/org/springframework/spring-aop/4.3.12.RELEASE/spring-aop-4.3.12.RELEASE-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-beans/4.3.12.RELEASE/spring-beans-4.3.12.RELEASE.jar" sourcepath="M2_REPO/org/springframework/spring-beans/4.3.12.RELEASE/spring-beans-4.3.12.RELEASE-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-core/4.3.12.RELEASE/spring-core-4.3.12.RELEASE.jar" sourcepath="M2_REPO/org/springframework/spring-core/4.3.12.RELEASE/spring-core-4.3.12.RELEASE-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-expression/4.3.12.RELEASE/spring-expression-4.3.12.RELEASE.jar" sourcepath="M2_REPO/org/springframework/spring-expression/4.3.12.RELEASE/spring-expression-4.3.12.RELEASE-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-test/4.3.12.RELEASE/spring-test-4.3.12.RELEASE.jar" sourcepath="M2_REPO/org/springframework/spring-test/4.3.12.RELEASE/spring-test-4.3.12.RELEASE-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-jdbc/4.3.12.RELEASE/spring-jdbc-4.3.12.RELEASE.jar" sourcepath="M2_REPO/org/springframework/spring-jdbc/4.3.12.RELEASE/spring-jdbc-4.3.12.RELEASE-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-tx/4.3.12.RELEASE/spring-tx-4.3.12.RELEASE.jar" sourcepath="M2_REPO/org/springframework/spring-tx/4.3.12.RELEASE/spring-tx-4.3.12.RELEASE-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-orm/4.3.12.RELEASE/spring-orm-4.3.12.RELEASE.jar" sourcepath="M2_REPO/org/springframework/spring-orm/4.3.12.RELEASE/spring-orm-4.3.12.RELEASE-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/ch/qos/logback/logback-classic/1.2.3/logback-classic-1.2.3.jar" sourcepath="M2_REPO/ch/qos/logback/logback-classic/1.2.3/logback-classic-1.2.3-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/ch/qos/logback/logback-core/1.2.3/logback-core-1.2.3.jar" sourcepath="M2_REPO/ch/qos/logback/logback-core/1.2.3/logback-core-1.2.3-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25.jar" sourcepath="M2_REPO/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/assertj/assertj-core/3.8.0/assertj-core-3.8.0.jar" sourcepath="M2_REPO/org/assertj/assertj-core/3.8.0/assertj-core-3.8.0-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/browserstack/automate-testassist/0.7.2-SNAPSHOT/automate-testassist-0.7.2-SNAPSHOT.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-context/4.3.5.RELEASE/spring-context-4.3.5.RELEASE.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-aop/4.3.5.RELEASE/spring-aop-4.3.5.RELEASE.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-beans/4.3.5.RELEASE/spring-beans-4.3.5.RELEASE.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-core/4.3.5.RELEASE/spring-core-4.3.5.RELEASE.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-expression/4.3.5.RELEASE/spring-expression-4.3.5.RELEASE.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-test/4.3.5.RELEASE/spring-test-4.3.5.RELEASE.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-jdbc/4.3.5.RELEASE/spring-jdbc-4.3.5.RELEASE.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-tx/4.3.5.RELEASE/spring-tx-4.3.5.RELEASE.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-orm/4.3.5.RELEASE/spring-orm-4.3.5.RELEASE.jar"/>
+	<classpathentry kind="var" path="M2_REPO/ch/qos/logback/logback-classic/1.1.8/logback-classic-1.1.8.jar"/>
+	<classpathentry kind="var" path="M2_REPO/ch/qos/logback/logback-core/1.1.8/logback-core-1.1.8.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-api/1.7.21/slf4j-api-1.7.21.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/assertj/assertj-core/2.0.0/assertj-core-2.0.0.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/github/marschall/memoryfilesystem/0.6.4/memoryfilesystem-0.6.4.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/testng/testng/6.9.10/testng-6.9.10.jar" sourcepath="M2_REPO/org/testng/testng/6.9.10/testng-6.9.10-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/beust/jcommander/1.48/jcommander-1.48.jar" sourcepath="M2_REPO/com/beust/jcommander/1.48/jcommander-1.48-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/beanshell/bsh/2.0b4/bsh-2.0b4.jar"/>
@@ -62,7 +64,7 @@
 	<classpathentry kind="var" path="M2_REPO/org/seleniumhq/selenium/selenium-support/3.5.3/selenium-support-3.5.3.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar"/>
 	<classpathentry kind="var" path="M2_REPO/junit/junit/4.12/junit-4.12.jar" sourcepath="M2_REPO/junit/junit/4.12/junit-4.12-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/apache/commons/commons-lang3/3.6/commons-lang3-3.6.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/apache/commons/commons-lang3/3.4/commons-lang3-3.4.jar"/>
 	<classpathentry kind="var" path="M2_REPO/commons-io/commons-io/2.5/commons-io-2.5.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/w3c/css/sac/1.3/sac-1.3.jar"/>
 	<classpathentry kind="var" path="M2_REPO/net/sourceforge/cssparser/cssparser/0.9.23/cssparser-0.9.23.jar"/>
@@ -149,11 +151,13 @@
 	<classpathentry kind="var" path="M2_REPO/info/cukes/cucumber-java/1.2.5/cucumber-java-1.2.5.jar" sourcepath="M2_REPO/info/cukes/cucumber-java/1.2.5/cucumber-java-1.2.5-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/info/cukes/cucumber-junit/1.2.5/cucumber-junit-1.2.5.jar" sourcepath="M2_REPO/info/cukes/cucumber-junit/1.2.5/cucumber-junit-1.2.5-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/net/serenity-bdd/serenity-junit/1.4.0/serenity-junit-1.4.0.jar" sourcepath="M2_REPO/net/serenity-bdd/serenity-junit/1.4.0/serenity-junit-1.4.0-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/apache/commons/commons-collections4/4.1/commons-collections4-4.1.jar" sourcepath="M2_REPO/org/apache/commons/commons-collections4/4.1/commons-collections4-4.1-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/apache/commons/commons-dbcp2/2.1.1/commons-dbcp2-2.1.1.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/apache/commons/commons-pool2/2.4.2/commons-pool2-2.4.2.jar"/>
 	<classpathentry kind="var" path="M2_REPO/net/serenity-bdd/serenity-spring/1.4.0/serenity-spring-1.4.0.jar" sourcepath="M2_REPO/net/serenity-bdd/serenity-spring/1.4.0/serenity-spring-1.4.0-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-context-support/4.3.5.RELEASE/spring-context-support-4.3.5.RELEASE.jar" sourcepath="M2_REPO/org/springframework/spring-context-support/4.3.5.RELEASE/spring-context-support-4.3.5.RELEASE-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/com/oracle/ojdbc8/12.2.0.1/ojdbc8-12.2.0.1.jar"/>
 	<classpathentry kind="src" path="/kiss-integration-front-common"/>
-	<classpathentry kind="var" path="M2_REPO/org/apache/commons/commons-collections4/4.1/commons-collections4-4.1.jar" sourcepath="M2_REPO/org/apache/commons/commons-collections4/4.1/commons-collections4-4.1-sources.jar"/>
+	<classpathentry kind="lib" path="D:/DOSSIERS/.m2/org/apache/commons/commons-dbcp2/2.1.1/commons-dbcp2-2.1.1.jar"/>
 	<classpathentry kind="src" output="target/classes" path="src/main/java">
 		<attributes>
 			<attribute name="optional" value="true"/>

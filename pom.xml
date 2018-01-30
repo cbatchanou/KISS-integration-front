@@ -21,11 +21,18 @@
 		<sonar-maven-plugin.version>2.6</sonar-maven-plugin.version>
 		<external-config.location>file:///${project.basedir}/../configuration</external-config.location>
 		<spring.version>4.3.12.RELEASE</spring.version>
+		<spring-boot.version>1.4.3.RELEASE</spring-boot.version>
+
+		<junit.version>4.12</junit.version>
 		<assertj-core.version>3.8.0</assertj-core.version>
+		<assertj-assertions-generator-maven-plugin.version>2.0.0</assertj-assertions-generator-maven-plugin.version>
+		<aspectj.version>1.8.11</aspectj.version>
 		<logback.version>1.2.3</logback.version>
 		<commons.collections.version>4.1</commons.collections.version>
 		<commons.lang.version>3.6</commons.lang.version>
-		<ojdbc.version>12.2.0.1</ojdbc.version>
+		<commons.dbcp2.version>2.1.1</commons.dbcp2.version>
+
+
 	</properties>
 
 
@@ -92,17 +99,6 @@
 
 		<plugins>
 			<plugin>
-				<groupId>com.browserstack</groupId>
-				<artifactId>automate-maven-plugin</artifactId>
-				<version>0.7.2-SNAPSHOT</version>
-				<configuration>
-					<source>1.8.0_151</source>
-					<target>1.8.0_151</target>
-					<complianceLevel>1.8.0_151</complianceLevel>
-				</configuration>
-			</plugin>
-
-			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${maven-compiler-plugin-version}</version>
@@ -129,18 +125,22 @@
 				<artifactId>sonar-maven-plugin</artifactId>
 				<version>${sonar-maven-plugin.version}</version>
 			</plugin>
+
+			<plugin>
+				<groupId>com.browserstack</groupId>
+				<artifactId>automate-maven-plugin</artifactId>
+				<version>0.7.2-SNAPSHOT</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<complianceLevel>1.8</complianceLevel>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
 	<dependencyManagement>
 		<dependencies>
-		
-			<dependency>
-				<groupId>com.browserstack</groupId>
-				<artifactId>automate-testassist</artifactId>
-				<version>0.7.2-SNAPSHOT</version>
-			</dependency>
-			
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-context</artifactId>
@@ -164,7 +164,13 @@
 					</exclusion>
 				</exclusions>
 			</dependency>
-
+			
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-core</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			
 			<dependency>
 				<groupId>org.assertj</groupId>
 				<artifactId>assertj-core</artifactId>
@@ -176,23 +182,51 @@
 				<artifactId>logback-classic</artifactId>
 				<version>${logback.version}</version>
 			</dependency>
-
+			
 			<dependency>
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-collections4</artifactId>
 				<version>${commons.collections.version}</version>
 			</dependency>
-
+			
 			<dependency>
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-lang3</artifactId>
 				<version>${commons.lang.version}</version>
 			</dependency>
+			
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-dbcp2</artifactId>
+				<version>${commons.dbcp2.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.browserstack</groupId>
+				<artifactId>automate-testassist</artifactId>
+				<version>0.7.2-SNAPSHOT</version>
+			</dependency>
+
+			<!-- aspectJ -->
+			<dependency>
+				<groupId>org.aspectj</groupId>
+				<artifactId>aspectjrt</artifactId>
+				<version>${aspectj.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.aspectj</groupId>
+				<artifactId>aspectjweaver</artifactId>
+				<version>${aspectj.version}</version>
+			</dependency>
+
+			<!-- Driver jdbc 6 oracle -->
 			<dependency>
 				<groupId>com.oracle</groupId>
 				<artifactId>ojdbc8</artifactId>
-				<version>${ojdbc.version}</version>
+				<version>11.2.0.3</version>
 			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 </project>

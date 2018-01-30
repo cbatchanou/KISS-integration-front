@@ -2,16 +2,15 @@ package fr.canalplus.front.bdd;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
-
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 
+import org.apache.bcel.generic.IF_ACMPEQ;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -23,28 +22,19 @@ import org.springframework.core.env.AbstractEnvironment;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.MapPropertySource;
 
+import fr.canalplus.front.bdd.steps.base.BrowserstackSerenityDriver;
 
 @Configuration
 @ComponentScan(basePackageClasses = ModuleConfig.class)
 @Import(fr.canalplus.integration.common.ModuleConfig.class)
-@PropertySources(value = { @PropertySource("classpath:configurations/browserstack.properties"),
-		@PropertySource("classpath:configurations/stepMateriel.properties"),
-		@PropertySource("classpath:configurations/connection.properties"),
-		@PropertySource("classpath:configurations/sqlQueries.properties") })
+@PropertySources(value = { @PropertySource("classpath:configurations/browserstack.properties"), @PropertySource("classpath:configurations/stepMateriel.properties")})
 public class ModuleConfig {
 
 	@Autowired
 	private Environment environment;
 
-	@Bean(name = "chromeDriver")
-	public WebDriver chromeDriver() throws URISyntaxException {
-		System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
-		return new ChromeDriver();
-	}
-
 	@Bean(name = "browserStackLocalDriver")
 	public WebDriver browserStackLocalDriver() {
-		addProxy();
 
 		String username = environment.getProperty("browserstack.user");
 		String accessKey = environment.getProperty("browserstack.key");
@@ -54,9 +44,12 @@ public class ModuleConfig {
 		Map<String, Object> map = displayAllProperties();
 
 		for (Map.Entry<String, Object> entry : map.entrySet()) {
-			String key = entry.getKey();
+			String key = (String) entry.getKey();
 
-			if (key.equals("capabilities.browserstack.local") || key.equals("capabilities.browserstack.debug")) {
+			if (key.equals("browserstack.key") || key.equals("browserstack.user")
+					|| key.equals("browserstack.server")) {
+				continue;
+			} else if (key.equals("capabilities.browserstack.local") || key.equals("capabilities.browserstack.debug")) {
 				capabilities.setCapability(key.replace("capabilities.", ""), (String) entry.getValue());
 			} else if (key.startsWith("capabilities.browserstack.")) {
 				capabilities.setCapability(key.replace("capabilities.browserstack.", ""), (String) entry.getValue());
@@ -69,24 +62,11 @@ public class ModuleConfig {
 		}
 		System.setProperty("browserstack.local", "true");
 		try {
-			return new RemoteWebDriver(new URL("http://" + username + ":" + accessKey + "@"
-					+ environment.getProperty("browserstack.server") + "/wd/hub"), capabilities);
+			return (new BrowserstackSerenityDriver()).connectViaProxy(capabilities);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
-	}
-
-	@Bean
-	public URI getSiteCanal() throws URISyntaxException {
-		return new URI(environment.getRequiredProperty("siteCanal.url"));
-	}
-
-	private void addProxy() {
-		System.getProperties().put("https.proxyHost", environment.getProperty("https.proxyHost"));
-		System.getProperties().put("https.proxyPort", environment.getProperty("https.proxyPort"));
-		System.getProperties().put("https.proxyUser", environment.getProperty("https.proxyUser"));
-		System.getProperties().put("https.proxyPassword", environment.getProperty("https.proxyPass"));
 	}
 
 	private Map<String, Object> displayAllProperties() {
@@ -100,4 +80,10 @@ public class ModuleConfig {
 		}
 		return map;
 	}
+
+	@Bean
+	public URI getSiteCanal() throws URISyntaxException {
+		return new URI("https://newose:n1w0se.09.16@boutique-recette.mycanal.fr/souscrire/offre?propalId=000012242");
+	}
+
 }
