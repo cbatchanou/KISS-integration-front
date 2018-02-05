@@ -3,7 +3,7 @@ package fr.canalplus.front.bdd.runners;
 import org.junit.runner.RunWith;
 
 import cucumber.api.CucumberOptions;
-import fr.canalplus.front.bdd.steps.base.BrowserstackSerenityTest;
+import fr.canalplus.front.bdd.service.BrowserstackSerenityTest;
 import net.serenitybdd.cucumber.CucumberWithSerenity;
 
 @RunWith(CucumberWithSerenity.class)

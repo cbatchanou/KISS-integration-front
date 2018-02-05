@@ -1,4 +1,4 @@
-package fr.canalplus.front.bdd.steps.base;
+package fr.canalplus.front.bdd.service;
 
 import java.net.URL;
 import org.apache.http.impl.client.HttpClientBuilder;

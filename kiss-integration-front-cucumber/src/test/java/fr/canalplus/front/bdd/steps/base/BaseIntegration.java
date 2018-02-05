@@ -30,6 +30,10 @@ import fr.canalplus.front.bdd.ModuleConfig;
 @ContextConfiguration(classes = { ModuleConfig.class, DBConfig.class })
 public abstract class BaseIntegration {
 
+	/*@Autowired
+	@Qualifier("chromeDriver")
+	public WebDriver driver;*/
+	
 	@Autowired
 	@Qualifier("browserStackLocalDriver")
 	public WebDriver browserStackLocaldriver;
@@ -104,13 +108,6 @@ public abstract class BaseIntegration {
 	@Value("${materiel.LeCube}")
 	public String le_cube;
 
-	public void listElementOf(String prefix) {
-		property = new Properties();
-		for (Entry<Object, Object> entry : property.entrySet()) {
-			if (entry.getKey().toString().startsWith(prefix))
-				assertTrue(isElementPresent(By.xpath(entry.getValue().toString())));
-		}
-	}
 
 	public boolean isElementPresent(By by) {
 		try {
@@ -127,7 +124,7 @@ public abstract class BaseIntegration {
 	}
 
 	public void getPageUrl() {
-		browserStackLocaldriver.manage().deleteAllCookies();
+		//browserStackLocaldriver.manage().deleteAllCookies();
 		browserStackLocaldriver.get(siteCanal.toString());
 		browserStackLocaldriver.get("https://boutique-recette.mycanal.fr/souscrire/offre?propalId=000012242");
 		waitForElementIsInvisible(By.cssSelector("div[class='spinner']"));

@@ -1,4 +1,4 @@
-package fr.canalplus.front.bdd.steps.base;
+package fr.canalplus.front.bdd.service;
 
 import java.net.InetAddress;
 import java.net.MalformedURLException;
@@ -22,17 +22,17 @@ import org.openqa.selenium.remote.HttpCommandExecutor;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.http.HttpClient.Factory;
 
+import fr.canalplus.integration.common.services.interfaces.BeanInterface;
 import net.thucydides.core.util.EnvironmentVariables;
 import net.thucydides.core.util.SystemEnvironmentVariables;
 
-public class BrowserstackSerenityDriver {
+public class BrowserstackSerenityDriver implements BeanInterface{
 	
 	public RemoteWebDriver connectViaProxy(DesiredCapabilities capability) {
 
 		EnvironmentVariables environmentVariables = SystemEnvironmentVariables.createEnvironmentVariables();
 		String proxyHost = environmentVariables.getProperty("https.proxyHost");
 		int proxyPort = 8080;
-		String proxyUserDomain = "cpgrp.root.local";
 		String proxyUser = environmentVariables.getProperty("https.proxyUser");
 		System.out.println("proxyuser"+proxyUser);
 		String proxyPassword = environmentVariables.getProperty("https.proxyPass");
@@ -65,11 +65,6 @@ public class BrowserstackSerenityDriver {
 				new NTCredentials(proxyUser, proxyPassword, getWorkstation(), ""));
 		
 		System.out.println("credentialsProvider: " + credsProvider.toString());
-		/*if (url.getUserInfo() != null && !url.getUserInfo().isEmpty()) {
-			credsProvider.setCredentials(
-					new AuthScope(url.getHost(), (url.getPort() > 0 ? url.getPort() : url.getDefaultPort())),
-					new UsernamePasswordCredentials(url.getUserInfo()));
-		}*/
 
 		builder.setProxy(proxy);
 		builder.setDefaultCredentialsProvider(credsProvider);
@@ -97,6 +92,12 @@ public class BrowserstackSerenityDriver {
 				return "Unknown";
 			}
 		}
+	}
+
+	@Override
+	public void doSomething() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

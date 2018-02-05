@@ -26,4 +26,8 @@ public class MessageStep extends BaseIntegration{
 	public void materielInvalide() {
 		
 	} 
+	
+	public void generale() {
+		
+	}
 }

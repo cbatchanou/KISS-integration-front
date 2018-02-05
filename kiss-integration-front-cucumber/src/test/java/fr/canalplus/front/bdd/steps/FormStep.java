@@ -91,9 +91,9 @@ public class FormStep extends BaseIntegration {
 		browserStackLocaldriver.findElement(org.openqa.selenium.By.id("phone")).sendKeys(phone);
 	}
 
-	public void inputMobile(String phone) {
+	public void inputMobile(String mobile) {
 		browserStackLocaldriver.findElement(org.openqa.selenium.By.id("mobile")).clear();
-		browserStackLocaldriver.findElement(org.openqa.selenium.By.id("mobile")).sendKeys(phone);
+		browserStackLocaldriver.findElement(org.openqa.selenium.By.id("mobile")).sendKeys(mobile);
 	}
 
 	public void inputEmail(String email) {
@@ -111,16 +111,17 @@ public class FormStep extends BaseIntegration {
 		browserStackLocaldriver.findElement(org.openqa.selenium.By.id("equipmentId")).sendKeys(numMaterial);
 	}
 
-	@Et("^Que l'on renseigne les champs nom et téléphone$")
+	@Et("^L'on renseigne les champs nom et téléphone$")
 	public void input_name_and_phone() {
 		System.out.println("je suis dans le formulaire");
 		Subscriber subscriber = subscriberContext().find(10214344);
 		inputName(subscriber.getNom());
 		inputPhone(subscriber.getPhone());
 	}
-	@Et("^Que l'on verifie les messages d'erreurs affichés du nom invalide et du téléphone invalide$")
+	@Et("^L'on verifie les messages d'erreurs affichés du nom invalide et du téléphone invalide$")
 	public void nom_et_telephone_invalides() throws InterruptedException {
 		System.out.println("je suis dans le formulaire");
+		System.out.println();
 		Subscriber subscriber = subscriberContext().find(10214344);
 		inputName(getPassword()); inputPhone(getString());
 		valider_le_formulaire();
@@ -140,32 +141,11 @@ public class FormStep extends BaseIntegration {
 		assertTrue(isElementPresent(org.openqa.selenium.By.cssSelector("tooltip-hitbix-info")));
 	}
 
-	@Et("^Que l'on renseigne le numéro de matériel (.*?)$")
+	@Et("^L'on renseigne le numéro de matériel (.*?)$")
 	public void formulaireOperateursFai(@Transform(OperateurTransformer.class)OperateurEnum operateurEnum) {
 		MaterialNumber material = materialContext().findMaterial(refOperateur(operateurEnum.toString()));
 		inputMaterial(material.getNumeroSerie());
 	}
-
-	/*@Et("^Que l'on renseigne le numero de materiel sfr$")
-	public void formulaireFaiSfr() {
-		MaterialNumber material = materialContext().findMaterial(REF_SFR);
-		inputMaterial(material.getNumeroSerie());
-	}
-	@Et("^Que l'on renseigne le numero de materiel numericable$")
-	public void formulaireFaiNumericable() {
-		MaterialNumber material = materialContext().findMaterial(REF_NUMERICABLE);
-		inputMaterial(material.getNumeroSerie());
-	}
-	@Et("^Que l'on renseigne le numero de materiel autre operateur$")
-	public void formulaireFaiAutreOperateur() {
-		MaterialNumber material = materialContext().findMaterial(REF_BBOX);
-		inputMaterial(material.getNumeroSerie());
-	}
-	@Et("^Que l'on renseigne le numero de materiel invalide$")
-	public void Numero_materiel_invalide() {
-		MaterialNumber material = materialContext().findMaterial(REF_FREE);
-		inputMaterial(material.getNumeroSerie());
-	}*/
 
 	@Alors("^Valider donc le formulaire$")
 	public void valider_le_formulaire() {
@@ -178,7 +158,7 @@ public class FormStep extends BaseIntegration {
 		Actions clickerConditions = new Actions(browserStackLocaldriver);
 		clickerConditions.moveToElement(element, 0, 0).click().perform();
 	}
-	
+	@Alors("^cliquer sur le lien Identifiez-vous$")
 	public void click_sur_identifiez_vous() {
 		browserStackLocaldriver.findElement(org.openqa.selenium.By.linkText("Identifiez-vous")).click();
 	}
@@ -187,23 +167,18 @@ public class FormStep extends BaseIntegration {
 		
 	}
 
-	@Alors("^Remplir tous les champs du formulaire$")
-	public void formulaireCreationDeCompte() {
-		Subscriber subscriber = subscriberContext().find(10214344);
-		inputCivility(subscriber.getCivility());
-		inputLastName(subscriber.getPrenom());
-		inputFirstName(subscriber.getNom());
-		inputZipCode(subscriber.getCodepostal());
-		inputAdress(subscriber.getAdresse());
-		inputMobile(subscriber.getPhone());
-		if (subscriber.getEmail()==null || subscriber.getEmail() == "" || subscriber.getEmail()==" ") inputEmail(getString());
-		else inputEmail(subscriber.getEmail().toString());
-		inputPassword(getPassword());
+	@Alors("^Je créé une personne avec les données: (\\d+), (.*), (.*), (\\d+), (.*), (.*), (.*), (.*)$")
+	public void formulaireCreationDeCompte(int civility, String prenom, String nom, int codeP, String adresse, String mobile, String email, String mdp ) {
+		inputCivility(civility);
+		inputFirstName(prenom); inputLastName(nom);
+		inputZipCode(codeP); inputAdress(adresse);
+		inputMobile(mobile); inputEmail(email);
 		click_sur_conditionsGenerales(conditionsG);
+		
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 	}

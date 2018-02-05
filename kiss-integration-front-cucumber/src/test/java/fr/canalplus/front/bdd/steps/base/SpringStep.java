@@ -1,5 +1,8 @@
 package fr.canalplus.front.bdd.steps.base;
 
+import javax.annotation.PreDestroy;
+
+import org.openqa.selenium.remote.SessionId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -8,6 +11,7 @@ import cucumber.api.java.Before;
 
 public class SpringStep extends BaseIntegration{
 	private static final Logger LOGGER = LoggerFactory.getLogger(SpringStep.class);
+	SessionId sessionId;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -17,7 +21,13 @@ public class SpringStep extends BaseIntegration{
 	@After
 	public void tearDown() throws Exception {
 		LOGGER.info("Closing drivers...");
-		if(browserStackLocaldriver != null)	browserStackLocaldriver.quit();
 		if(context != null) context.close(); 
+	}
+	
+	@PreDestroy
+	public void destroy() {
+		LOGGER.info("Closing drivers... Method destroy..");
+		if(browserStackLocaldriver != null)	browserStackLocaldriver.quit();
+		//if(driver != null)	driver.quit();
 	}
 }

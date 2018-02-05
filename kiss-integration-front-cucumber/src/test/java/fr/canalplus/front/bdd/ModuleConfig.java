@@ -7,6 +7,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.annotation.PostConstruct;
+
 import org.apache.bcel.generic.IF_ACMPEQ;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -22,7 +24,8 @@ import org.springframework.core.env.AbstractEnvironment;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.MapPropertySource;
 
-import fr.canalplus.front.bdd.steps.base.BrowserstackSerenityDriver;
+import bsh.Capabilities;
+import fr.canalplus.front.bdd.service.BrowserstackSerenityDriver;
 
 @Configuration
 @ComponentScan(basePackageClasses = ModuleConfig.class)
@@ -33,9 +36,42 @@ public class ModuleConfig {
 	@Autowired
 	private Environment environment;
 
+	/*@Bean(name = "chromeDriver")
+	public WebDriver chromeDriver() throws URISyntaxException {
+		System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
+		return new ChromeDriver();
+	}*/
+	
 	@Bean(name = "browserStackLocalDriver")
 	public WebDriver browserStackLocalDriver() {
+		DesiredCapabilities capabilities = new DesiredCapabilities();
+		capabilities = getCapabilities();
+		try {
+			return (new BrowserstackSerenityDriver()).connectViaProxy(capabilities);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 
+	@Bean
+	public URI getSiteCanal() throws URISyntaxException {
+		return new URI(environment.getRequiredProperty("siteCanal.url"));
+	}
+	
+	private Map<String, Object> displayAllProperties() {
+		Map<String, Object> map = new HashMap<>();
+		for (Iterator it = ((AbstractEnvironment) environment).getPropertySources().iterator(); it.hasNext();) {
+			org.springframework.core.env.PropertySource propertySource = (org.springframework.core.env.PropertySource) it
+					.next();
+			if (propertySource instanceof MapPropertySource) {
+				map.putAll(((MapPropertySource) propertySource).getSource());
+			}
+		}
+		return map;
+	}
+	
+	public DesiredCapabilities getCapabilities() {
 		String username = environment.getProperty("browserstack.user");
 		String accessKey = environment.getProperty("browserstack.key");
 
@@ -61,29 +97,9 @@ public class ModuleConfig {
 			}
 		}
 		System.setProperty("browserstack.local", "true");
-		try {
-			return (new BrowserstackSerenityDriver()).connectViaProxy(capabilities);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
+		return capabilities;
 	}
-
-	private Map<String, Object> displayAllProperties() {
-		Map<String, Object> map = new HashMap<>();
-		for (Iterator it = ((AbstractEnvironment) environment).getPropertySources().iterator(); it.hasNext();) {
-			org.springframework.core.env.PropertySource propertySource = (org.springframework.core.env.PropertySource) it
-					.next();
-			if (propertySource instanceof MapPropertySource) {
-				map.putAll(((MapPropertySource) propertySource).getSource());
-			}
-		}
-		return map;
-	}
-
-	@Bean
-	public URI getSiteCanal() throws URISyntaxException {
-		return new URI("https://newose:n1w0se.09.16@boutique-recette.mycanal.fr/souscrire/offre?propalId=000012242");
-	}
+	
+	
 
 }
