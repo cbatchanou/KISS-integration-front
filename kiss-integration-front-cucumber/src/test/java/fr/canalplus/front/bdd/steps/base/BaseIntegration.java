@@ -24,8 +24,8 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
-import fr.canalplus.front.bdd.DBConfig;
 import fr.canalplus.front.bdd.ModuleConfig;
+import fr.canalplus.integration.bdd.DBConfig;
 
 @ContextConfiguration(classes = { ModuleConfig.class, DBConfig.class })
 public abstract class BaseIntegration {
@@ -107,6 +107,9 @@ public abstract class BaseIntegration {
 
 	@Value("${materiel.LeCube}")
 	public String le_cube;
+	
+	@Value("${materiel.LeCube}")
+	public String reCAPTCHA;
 
 
 	public boolean isElementPresent(By by) {
@@ -124,7 +127,7 @@ public abstract class BaseIntegration {
 	}
 
 	public void getPageUrl() {
-		//browserStackLocaldriver.manage().deleteAllCookies();
+		browserStackLocaldriver.manage().deleteAllCookies();
 		browserStackLocaldriver.get(siteCanal.toString());
 		browserStackLocaldriver.get("https://boutique-recette.mycanal.fr/souscrire/offre?propalId=000012242");
 		waitForElementIsInvisible(By.cssSelector("div[class='spinner']"));

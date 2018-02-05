@@ -44,8 +44,7 @@ public class SubscriberDaoImpl implements SubscriberDao, PersonDao {
 
 	@Override
 	public Subscriber find(Integer numAbo) {
-		System.out.println("cgaTemplate:"+cgaTemplate);
-		Subscriber subscriber = (Subscriber) cgaTemplate.queryForObject(sql_find_subscriber, new Object[] {numAbo}, new BeanPropertyRowMapper(Subscriber.class));
+		Subscriber subscriber = (Subscriber) cgaTemplate.queryForObject(sql_find_subscriber, new Object[] {numAbo}, new BeanPropertyRowMapper<Subscriber>(Subscriber.class));
 		return subscriber;
 	}
 

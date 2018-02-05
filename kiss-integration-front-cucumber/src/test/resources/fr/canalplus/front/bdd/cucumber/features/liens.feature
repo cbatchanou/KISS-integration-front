@@ -26,4 +26,10 @@ Fonctionnalité: Autmatisation des liens de la boutique
     Etant donné L'ouverture de la page souscription
     Lorsque L'on clique sur voir le detail
 
- 
+  @lienIdent @lien
+  Scénario: IDENTIFICATION ABONNE : VERFIER QUE LE LIEN FONCTIONNE CORRECTEMENT
+    Etant donné L'ouverture de la page souscription
+    Lorsque L'on clique sur le decodeur Canal
+    Et Verification des elements presents dans soucription decodeurs canal
+    Et L'on clique sur jai deja une parabole
+    Alors cliquer sur le lien Identifiez-vous

@@ -12,10 +12,10 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import cucumber.api.Transform;
 import cucumber.api.java.fr.Alors;
 import cucumber.api.java.fr.Et;
-import fr.canalplus.front.bdd.DBConfig;
 import fr.canalplus.front.bdd.ModuleConfig;
 import fr.canalplus.front.bdd.steps.base.BaseIntegration;
 import fr.canalplus.front.bdd.transformer.OperateurTransformer;
+import fr.canalplus.integration.bdd.DBConfig;
 import fr.canalplus.integration.common.beans.entities.MaterialNumber;
 import fr.canalplus.integration.common.beans.entities.Subscriber;
 import fr.canalplus.integration.common.enums.OperateurEnum;
@@ -100,6 +100,7 @@ public class FormStep extends BaseIntegration {
 		browserStackLocaldriver.findElement(org.openqa.selenium.By.id("email")).clear();
 		browserStackLocaldriver.findElement(org.openqa.selenium.By.id("email")).sendKeys(email);
 	}
+	
 
 	public void inputPassword(String password) {
 		browserStackLocaldriver.findElement(org.openqa.selenium.By.id("password")).clear();
@@ -113,32 +114,29 @@ public class FormStep extends BaseIntegration {
 
 	@Et("^L'on renseigne les champs nom et téléphone$")
 	public void input_name_and_phone() {
-		System.out.println("je suis dans le formulaire");
 		Subscriber subscriber = subscriberContext().find(10214344);
 		inputName(subscriber.getNom());
 		inputPhone(subscriber.getPhone());
 	}
 	@Et("^L'on verifie les messages d'erreurs affichés du nom invalide et du téléphone invalide$")
 	public void nom_et_telephone_invalides() throws InterruptedException {
-		System.out.println("je suis dans le formulaire");
-		System.out.println();
 		Subscriber subscriber = subscriberContext().find(10214344);
 		inputName(getPassword()); inputPhone(getString());
 		valider_le_formulaire();
-		assertEquals("Veuillez saisir un nom valide", browserStackLocaldriver.findElement(org.openqa.selenium.By.xpath("//div[1]/div[3]/p[1]")).getText());
-		assertEquals("Veuillez saisir un numéro de téléphone valide", browserStackLocaldriver.findElement(org.openqa.selenium.By.xpath("//div[1]/div[3]/p[2]")).getText());
+		assertEquals("Veuillez saisir un nom valide", browserStackLocaldriver.findElement(By.xpath("//div[1]/div[3]/p[1]")).getText());
+		assertEquals("Veuillez saisir un numéro de téléphone valide", browserStackLocaldriver.findElement(By.xpath("//div[1]/div[3]/p[2]")).getText());
 		
 		inputName(subscriber.getNom());
 		valider_le_formulaire();
-		assertEquals("Veuillez saisir un numéro de téléphone valide", browserStackLocaldriver.findElement(org.openqa.selenium.By.xpath("//div[1]/div[3]/p[2]")).getText());
+		assertEquals("Veuillez saisir un numéro de téléphone valide", browserStackLocaldriver.findElement(By.xpath("//div[1]/div[3]/p[2]")).getText());
 		
 		inputName(getPassword()); inputPhone(subscriber.getPhone());
 		valider_le_formulaire();
-		assertEquals("Veuillez saisir un nom valide", browserStackLocaldriver.findElement(org.openqa.selenium.By.xpath("//div[1]/div[3]/p[1]")).getText());
+		assertEquals("Veuillez saisir un nom valide", browserStackLocaldriver.findElement(By.xpath("//div[1]/div[3]/p[1]")).getText());
 	}
 	
 	public void hitbox() {
-		assertTrue(isElementPresent(org.openqa.selenium.By.cssSelector("tooltip-hitbix-info")));
+		assertTrue(isElementPresent(By.cssSelector("tooltip-hitbix-info")));
 	}
 
 	@Et("^L'on renseigne le numéro de matériel (.*?)$")
@@ -148,9 +146,10 @@ public class FormStep extends BaseIntegration {
 	}
 
 	@Alors("^Valider donc le formulaire$")
-	public void valider_le_formulaire() {
-		browserStackLocaldriver.findElement(org.openqa.selenium.By.cssSelector(continuer)).click();
-		waitForElementIsInvisible(org.openqa.selenium.By.cssSelector("div[class='bubblingG']"));
+	public void valider_le_formulaire() throws InterruptedException {
+		browserStackLocaldriver.findElement(By.cssSelector(continuer)).click();
+		waitForElementIsInvisible(By.cssSelector("div[class='spinner']"));
+		Thread.sleep(5000);
 	}
 
 	public void click_sur_conditionsGenerales(String selector) {
@@ -158,9 +157,34 @@ public class FormStep extends BaseIntegration {
 		Actions clickerConditions = new Actions(browserStackLocaldriver);
 		clickerConditions.moveToElement(element, 0, 0).click().perform();
 	}
+	
+	public void click_sur_reCAPTCHA() {
+		WebElement element = browserStackLocaldriver.findElement(org.openqa.selenium.By.cssSelector(reCAPTCHA));
+		Actions clickerConditions = new Actions(browserStackLocaldriver);
+		clickerConditions.moveToElement(element, 0, 0).click().perform();
+	}
 	@Alors("^cliquer sur le lien Identifiez-vous$")
-	public void click_sur_identifiez_vous() {
-		browserStackLocaldriver.findElement(org.openqa.selenium.By.linkText("Identifiez-vous")).click();
+	public void click_sur_identifiez_vous() throws InterruptedException {
+		browserStackLocaldriver.findElement(By.linkText("Identifiez-vous")).click();
+		assertEquals("MyCanal - Souscrire - Identification", browserStackLocaldriver.getTitle());
+	}
+	
+	@Et("^Renseigner un (.*) et un (.*) <status>$")
+	public void identifiez_vous(String email, String password) throws InterruptedException {
+		
+		browserStackLocaldriver.findElement(By.id("sso-email")).clear();
+		browserStackLocaldriver.findElement(By.id("sso-email")).sendKeys(email);
+		
+		browserStackLocaldriver.findElement(By.id("sso-pass")).clear();
+		browserStackLocaldriver.findElement(By.id("sso-pass")).sendKeys(password);
+		click_sur_reCAPTCHA();
+		valider_le_formulaire();
+		
+	}
+	@Et("^Verifier les messages d'erreurs$")
+	public void messageErreurIdentification() {
+		assertEquals("Erreur d'identification", browserStackLocaldriver.findElement(By.id("errorTitle")).getText());
+		assertEquals("Merci de verifier votre email et votre mot de passe", browserStackLocaldriver.findElement(By.id("errorText")).getText());
 	}
 	
 	public void verification_elements_presents() {

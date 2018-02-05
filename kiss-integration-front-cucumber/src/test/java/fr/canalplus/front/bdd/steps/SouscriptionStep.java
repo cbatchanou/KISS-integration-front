@@ -62,19 +62,10 @@ public class SouscriptionStep extends BaseIntegration {
 		assertEquals("MyCanal - Souscrire - Matériel", browserStackLocaldriver.getTitle());
 	}
 
-	/*@Lorsque("^L'on clique sur materiel (.*?)$")
+	@Lorsque("^L'on clique sur materiel (.*?)$")
 	public void click_sur_materiel(@Transform(OperateurTransformer.class) OperateurEnum operateurEnum)
 			throws InterruptedException, IOException {
-		System.out.println("xpath: "+getOperateur(operateurEnum.toString()));
-		browserStackLocaldriver.findElement(By.xpath(getOperateur(operateurEnum.toString()))).click();
-		assertEquals("MyCanal - Souscrire - Matériel", browserStackLocaldriver.getTitle());
-		Thread.sleep(5000);
-	}
-*/
-	@Lorsque("^L'on clique sur materiel bbox$")
-	public void click_sur_materiel_bbox() throws InterruptedException, IOException {
-		
-		WebElement element = browserStackLocaldriver.findElement(org.openqa.selenium.By.xpath(bbox));
+		WebElement element = browserStackLocaldriver.findElement(By.xpath(getOperateur(operateurEnum.toString())));
 		Actions clickerElement = new Actions(browserStackLocaldriver);
 		clickerElement.moveToElement(element, 0, 0).click().perform();
 		assertEquals("MyCanal - Souscrire - Matériel", browserStackLocaldriver.getTitle());
@@ -110,13 +101,17 @@ public class SouscriptionStep extends BaseIntegration {
 
 	@Lorsque("^L'on clique sur voir les modalités de loffre et des services$")
 	public void voir_les_modalités_de_loffre_et_des_services() throws InterruptedException, IOException {
-		browserStackLocaldriver.findElement(By.cssSelector(link_modalite_offre)).click();
+		WebElement element = browserStackLocaldriver.findElement(By.xpath(link_modalite_offre));
+		Actions clickerElement = new Actions(browserStackLocaldriver);
+		clickerElement.moveToElement(element, 0, 0).click().perform();
 		Thread.sleep(5000);
 	}
 
 	@Lorsque("^L'on clique sur en savoir plus sur les decodeurs compatibles$")
 	public void en_savoir_sur_les_décodeurs_compatibles() throws InterruptedException, IOException {
-		browserStackLocaldriver.findElement(By.cssSelector(link_decodeur_compatible)).click();
+		WebElement element = browserStackLocaldriver.findElement(By.xpath(link_decodeur_compatible));
+		Actions clickerElement = new Actions(browserStackLocaldriver);
+		clickerElement.moveToElement(element, 0, 0).click().perform();
 		browserStackLocaldriver.switchTo().parentFrame();
 		Thread.sleep(5000);
 	}

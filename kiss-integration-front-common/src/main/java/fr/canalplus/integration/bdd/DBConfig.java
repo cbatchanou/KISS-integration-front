@@ -1,4 +1,4 @@
-package fr.canalplus.front.bdd;
+package fr.canalplus.integration.bdd;
 
 import javax.sql.DataSource;
 
@@ -19,7 +19,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 @Configuration
 @ComponentScan(basePackageClasses = DBConfig.class)
 @Import(fr.canalplus.integration.common.DBConfig.class)
-@PropertySources(value = { @PropertySource("classpath:configurations/connection.properties"), @PropertySource("classpath:configurations/sqlQueries.properties")})
+@PropertySources(value = { @PropertySource("classpath:configurations/connection.properties")})
 public class DBConfig {
 	
 	@Autowired
@@ -33,7 +33,6 @@ public class DBConfig {
 		dataSource.setUrl(environment.getRequiredProperty("db.cga.url"));
 		dataSource.setUsername(environment.getRequiredProperty("db.cga.username"));
 		dataSource.setPassword(environment.getRequiredProperty("db.cga.password"));
-		System.out.println("datasource cga:"+dataSource.toString());
 		return dataSource;
 	}
 	
@@ -45,7 +44,6 @@ public class DBConfig {
 		dataSource.setUrl(environment.getRequiredProperty("db.sge.url"));
 		dataSource.setUsername(environment.getRequiredProperty("db.sge.username"));
 		dataSource.setPassword(environment.getRequiredProperty("db.sge.password"));
-		System.out.println("datasource sge:"+dataSource.toString());
 		return dataSource;
 	}
 	
@@ -53,7 +51,6 @@ public class DBConfig {
 	public JdbcTemplate cgaJdbcTemplate(@Qualifier("CGADEV10") DataSource cgaDataSource) {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(cgaDataSource);
 		jdbcTemplate.setResultsMapCaseInsensitive(true);
-		System.out.println("jdbcTemplate cga:"+jdbcTemplate.toString());
 		return jdbcTemplate;
 	}
 	
@@ -61,7 +58,6 @@ public class DBConfig {
 	public JdbcTemplate sgeJdbcTemplate(@Qualifier("SGEWEB")DataSource sgeDataSource) {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(sgeDataSource);
 		jdbcTemplate.setResultsMapCaseInsensitive(true);
-		System.err.println("jdbcTemplate sge:"+jdbcTemplate.toString());
 		return jdbcTemplate;
 	}
 

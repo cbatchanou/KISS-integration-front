@@ -40,11 +40,8 @@
 
 	</build>
 	<dependencies>
-		 <!-- <dependency>
-			<groupId>com.browserstack</groupId>
-			<artifactId>automate-testassist</artifactId>
-			<version>0.7.2-SNAPSHOT</version>
-		</dependency>  -->
+		<!-- <dependency> <groupId>com.browserstack</groupId> <artifactId>automate-testassist</artifactId> 
+			<version>0.7.2-SNAPSHOT</version> </dependency> -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
@@ -65,14 +62,19 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-dbcp2</artifactId>
-		</dependency>
-		
-		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 		</dependency>
-
+		
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-dbcp2</artifactId>
+			<version>2.1.1</version>
+		</dependency>
+		<dependency>
+				<groupId>com.oracle</groupId>
+				<artifactId>ojdbc8</artifactId>
+				<version>${ojdbc.version}</version>
+			</dependency>
 	</dependencies>
 </project>

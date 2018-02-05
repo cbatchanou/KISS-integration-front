@@ -30,7 +30,7 @@ import fr.canalplus.front.bdd.service.BrowserstackSerenityDriver;
 @Configuration
 @ComponentScan(basePackageClasses = ModuleConfig.class)
 @Import(fr.canalplus.integration.common.ModuleConfig.class)
-@PropertySources(value = { @PropertySource("classpath:configurations/browserstack.properties"), @PropertySource("classpath:configurations/stepMateriel.properties")})
+@PropertySources(value = { @PropertySource("classpath:configurations/browserstack.properties"), @PropertySource("classpath:configurations/stepMateriel.properties"), @PropertySource("classpath:configurations/sqlQueries.properties")})
 public class ModuleConfig {
 
 	@Autowired
