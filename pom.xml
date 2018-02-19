@@ -217,7 +217,7 @@
 			<!-- Driver jdbc 6 oracle -->
 			<dependency>
 				<groupId>com.oracle</groupId>
-				<artifactId>ojdbc</artifactId>
+				<artifactId>ojdbc8</artifactId>
 				<version>${ojdbc.version}</version>
 			</dependency>
 
