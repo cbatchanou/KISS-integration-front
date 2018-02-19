@@ -9,6 +9,8 @@ import java.util.Properties;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
@@ -45,6 +47,9 @@ public abstract class BaseIntegration {
 
 	public Properties property;
 
+	@Value("${environment.single.browser}")
+	public String browserName;
+	
 	@Value("${materiel.bbox}")
 	public String bbox;
 
@@ -180,5 +185,27 @@ public abstract class BaseIntegration {
 
 		return op;
 
+	}
+	public void switchBrowser(String xpath) {
+		
+		switch (browserName) {
+		case "chrome":
+			WebElement element = browserStackLocaldriver.findElement(By.xpath(xpath));
+			Actions clickerElement = new Actions(browserStackLocaldriver);
+			clickerElement.moveToElement(element, 0, 0).click().perform();
+			break;
+		case "firefox":
+			browserStackLocaldriver.findElement(By.xpath(xpath)).click();
+			break;
+		case "IE":
+			browserStackLocaldriver.findElement(By.xpath(xpath)).click();
+			break;
+		case "safari":
+			browserStackLocaldriver.findElement(By.xpath(xpath)).click();
+			break;
+		case "edge":
+			browserStackLocaldriver.findElement(By.xpath(xpath)).click();
+			break;
+		}
 	}
 }

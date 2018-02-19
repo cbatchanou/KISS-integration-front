@@ -12,6 +12,7 @@ import javax.annotation.PostConstruct;
 import org.apache.bcel.generic.IF_ACMPEQ;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -46,6 +47,8 @@ public class ModuleConfig {
 	public WebDriver browserStackLocalDriver() {
 		DesiredCapabilities capabilities = new DesiredCapabilities();
 		capabilities = getCapabilities();
+		capabilities.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
+		capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
 		try {
 			return (new BrowserstackSerenityDriver()).connectViaProxy(capabilities);
 		} catch (Exception e) {

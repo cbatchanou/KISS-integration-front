@@ -6,8 +6,6 @@ import static org.junit.Assert.assertTrue;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.BeforeSuite;
@@ -25,7 +23,7 @@ public class SouscriptionStep extends BaseIntegration {
 
 	@BeforeSuite
 	public void setUp() throws URISyntaxException {
-		
+
 	}
 
 	@Etantdonné("^L'ouverture de la page souscription$")
@@ -57,7 +55,7 @@ public class SouscriptionStep extends BaseIntegration {
 	@Lorsque("^L'on clique sur le decodeur Canal plus Le Cube$")
 	public void click_sur_Le_Cube() throws InterruptedException, IOException {
 		// le cube ne passe pas avec le cssselector:: il se confond au decodeur canal
-		browserStackLocaldriver.findElement(By.xpath(le_cube)).click();   
+		browserStackLocaldriver.findElement(By.xpath(le_cube)).click();
 		waitForElementIsInvisible(By.cssSelector("div[class='spinner']"));
 		assertEquals("MyCanal - Souscrire - Matériel", browserStackLocaldriver.getTitle());
 	}
@@ -65,13 +63,11 @@ public class SouscriptionStep extends BaseIntegration {
 	@Lorsque("^L'on clique sur materiel (.*?)$")
 	public void click_sur_materiel(@Transform(OperateurTransformer.class) OperateurEnum operateurEnum)
 			throws InterruptedException, IOException {
-		WebElement element = browserStackLocaldriver.findElement(By.xpath(getOperateur(operateurEnum.toString())));
-		Actions clickerElement = new Actions(browserStackLocaldriver);
-		clickerElement.moveToElement(element, 0, 0).click().perform();
+		switchBrowser(getOperateur(operateurEnum.toString()));
 		assertEquals("MyCanal - Souscrire - Matériel", browserStackLocaldriver.getTitle());
 		Thread.sleep(5000);
 	}
-	 
+
 	@Lorsque("^L'on clique sur materiel smartTV$")
 	public void click_sur_materiel_smartTV() throws InterruptedException, IOException {
 		browserStackLocaldriver.findElement(By.xpath(smartTV)).click();
@@ -101,17 +97,13 @@ public class SouscriptionStep extends BaseIntegration {
 
 	@Lorsque("^L'on clique sur voir les modalités de loffre et des services$")
 	public void voir_les_modalités_de_loffre_et_des_services() throws InterruptedException, IOException {
-		WebElement element = browserStackLocaldriver.findElement(By.xpath(link_modalite_offre));
-		Actions clickerElement = new Actions(browserStackLocaldriver);
-		clickerElement.moveToElement(element, 0, 0).click().perform();
+		switchBrowser(link_modalite_offre);
 		Thread.sleep(5000);
 	}
 
 	@Lorsque("^L'on clique sur en savoir plus sur les decodeurs compatibles$")
 	public void en_savoir_sur_les_décodeurs_compatibles() throws InterruptedException, IOException {
-		WebElement element = browserStackLocaldriver.findElement(By.xpath(link_decodeur_compatible));
-		Actions clickerElement = new Actions(browserStackLocaldriver);
-		clickerElement.moveToElement(element, 0, 0).click().perform();
+		switchBrowser(link_decodeur_compatible);
 		browserStackLocaldriver.switchTo().parentFrame();
 		Thread.sleep(5000);
 	}

@@ -10,7 +10,6 @@ Fonctionnalité: Autmatisation des liens de la boutique
     Etant donné L'ouverture de la page souscription
     Lorsque L'on clique sur en savoir plus sur les decodeurs canal
 
-  #ne marche pas
   @liencompatible @lien
   Scénario: Scénario de vérification du lien : En savoir plus sur les décodeurs compatibles
     Etant donné L'ouverture de la page souscription
