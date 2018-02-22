@@ -3,7 +3,7 @@ Fonctionnalité: Parcours souscription - Decodeurs CANAL
 
   ## Step recevoir une parabole ##
   @SPboutique @full
-  Plan du Scénario: Parcours décodeur CANAL avec l'option recevoir ma parabole
+  Plan du Scénario: Parcours CANAL avec l'option recevoir ma parabole: Livraison en boutique
     Etant donné L'ouverture de la page souscription
     Et Verifier la presence entete page
     Et Verifier la presence du panier flottant
@@ -20,7 +20,7 @@ Fonctionnalité: Parcours souscription - Decodeurs CANAL
       |        1 | celestin | CARPIN |      87000 | avenue de La Borie | 0666565656 | sans |
 
   @SPdomicile @full
-  Plan du Scénario: Parcours décodeur CANAL avec l'option recevoir ma parabole
+  Plan du Scénario: Parcours CANAL avec l'option recevoir ma parabole: Livraison à domicile
     Etant donné L'ouverture de la page souscription
     Et Verifier la presence entete page
     Et Verifier la presence du panier flottant
@@ -37,7 +37,7 @@ Fonctionnalité: Parcours souscription - Decodeurs CANAL
       |        1 | celestin | CARPIN |      87000 | avenue de La Borie | 0666565656 | sans |
 
   @SPrelais @full
-  Plan du Scénario: Parcours décodeur CANAL avec l'option recevoir ma parabole
+  Plan du Scénario: Parcours CANAL avec l'option recevoir ma parabole: Livraison en point relais
     Etant donné L'ouverture de la page souscription
     Et Verifier la presence entete page
     Et Verifier la presence du panier flottant
@@ -54,7 +54,7 @@ Fonctionnalité: Parcours souscription - Decodeurs CANAL
       |        1 | celestin | CARPIN |      87000 | avenue de La Borie | 0666565656 | sans |
 
   @SPinstallation @full
-  Plan du Scénario: Parcours décodeur CANAL avec l'option recevoir ma parabole
+  Plan du Scénario: Parcours CANAL avec l'option recevoir ma parabole: installation à domicile
     Etant donné L'ouverture de la page souscription
     Et Verifier la presence entete page
     Et Verifier la presence du panier flottant
@@ -72,7 +72,7 @@ Fonctionnalité: Parcours souscription - Decodeurs CANAL
 
   ## j'ai deja une parabole ##
   @APboutique @full
-  Plan du Scénario: Parcours décodeur CANAL avec l'option deja une parabole
+  Plan du Scénario: Parcours CANAL avec l'option deja une parabole: Livraison en boutique
     Etant donné L'ouverture de la page souscription
     Et Verifier la presence entete page
     Et Verifier la presence du panier flottant
@@ -89,7 +89,7 @@ Fonctionnalité: Parcours souscription - Decodeurs CANAL
       |        2 | carolle | Firmament |      87000 | avenue de La Borie | 0666565656 | avec |
 
   @APdomicile @full
-  Plan du Scénario: Parcours décodeur CANAL avec l'option deja une parabole
+  Plan du Scénario: Parcours CANAL avec l'option deja une parabole: Livraison à domicile
     Etant donné L'ouverture de la page souscription
     Et Verifier la presence entete page
     Et Verifier la presence du panier flottant
@@ -106,7 +106,7 @@ Fonctionnalité: Parcours souscription - Decodeurs CANAL
       |        2 | carolle | Firmament |      87000 | avenue de La Borie | 0666565656 | avec |
 
   @APrelais @full
-  Plan du Scénario: Parcours décodeur CANAL avec l'option deja une parabole
+  Plan du Scénario: Parcours CANAL avec l'option deja une parabole: Livraison en point relais
     Etant donné L'ouverture de la page souscription
     Et Verifier la presence entete page
     Et Verifier la presence du panier flottant
@@ -123,7 +123,7 @@ Fonctionnalité: Parcours souscription - Decodeurs CANAL
       |        2 | carolle | Firmament |      87000 | avenue de La Borie | 0666565656 | avec |
 
   @TNTrelais @full
-  Plan du Scénario: Parcours décodeur CANAL +LE CUBE
+  Plan du Scénario: Parcours décodeur CANAL +LE CUBE: Livraison en point relais
     Etant donné L'ouverture de la page souscription
     Et Verifier la presence entete page
     Et Verifier la presence du panier flottant
