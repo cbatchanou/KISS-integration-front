@@ -2,35 +2,39 @@
 Fonctionnalité: Automatisation des formulaires - Page souscription
 
   @op12 @fai
-  Plan du Scénario: FORMULAIRE VALIDE: souscription du materiel <operateur>
+  Plan du Scénario: Souscription du materiel <operateur>
     Etant donné L'ouverture de la page souscription
     Lorsque L'on clique sur materiel <operateur>
     Et L'on renseigne les champs nom et téléphone
-    Alors Valider donc le formulaire
+    Alors Validation du formulaire
+    Alors Création d'une personne avec les données: <civility>, <Prenom>, <Nom>, <CodePostal>, <Adresse>, <Mobile>
+    Alors Validation du formulaire
+    Et Validation du recapitulatif du récap matériel <operateur>
+    Et Validation du paiement par CB <etat> IBAN
 
     Exemples: 
-      | operateur |
-      | FREE      |
-      | BOUYGUES  |
+      | operateur | civility | Prenom   | Nom    | CodePostal | Adresse             | Mobile     | etat |
+      | BOUYGUES  |        1 | celestin | CARPIN |      87000 | avenue de La Borie  | 0666565656 | sans |
+      | FREE      |        1 | Romane   | DIJON  |      75001 | 2 Rue de la liberté | 0266565656 | sans |
 
   @op3 @fai
-  Plan du Scénario: FORMULAIRE VALIDE: souscription du materiel <operateur>
+  Plan du Scénario: Souscription du materiel <operateur>
     Etant donné L'ouverture de la page souscription
     Lorsque L'on clique sur materiel <operateur>
     Et L'on renseigne les champs nom et téléphone
     Et L'on renseigne le numéro de matériel <operateur>
-    Alors Valider donc le formulaire
+    Alors Validation du formulaire
 
     Exemples: 
       | operateur |
       | ORANGE    |
 
   @op456 @fai
-  Plan du Scénario: FORMULAIRE VALIDE: souscription du materiel <operateur>
+  Plan du Scénario: Souscription du materiel <operateur>
     Etant donné L'ouverture de la page souscription
     Lorsque L'on clique sur materiel <operateur>
     Et L'on renseigne le numéro de matériel <operateur>
-    Alors Valider donc le formulaire
+    Alors Validation du formulaire
 
     Exemples: 
       | operateur   |
@@ -46,7 +50,7 @@ Fonctionnalité: Automatisation des formulaires - Page souscription
   #
   #
   @fai
-  Plan du Scénario: FORMULAIRE INVALIDE: <operateur>: Cas d'un nom invalide et d'un téléphone valide
+  Plan du Scénario: <operateur>: Cas d'un nom invalide et d'un téléphone valide
     Etant donné L'ouverture de la page souscription
     Lorsque L'on clique sur materiel <operateur>
     Et Saisir le cas d'un nom invalide et d'un téléphone valide: <nom>; <phone>
@@ -57,7 +61,7 @@ Fonctionnalité: Automatisation des formulaires - Page souscription
       | BOUYGUES  | QKJFH234Lµ | 0156785634 |
 
   @fai
-  Plan du Scénario: FORMULAIRE INVALIDE: <operateur>: Cas d'un nom valide et d'un téléphone invalide
+  Plan du Scénario: <operateur>: Cas d'un nom valide et d'un téléphone invalide
     Etant donné L'ouverture de la page souscription
     Lorsque L'on clique sur materiel <operateur>
     Et Saisir le cas d'un nom valide et d'un téléphone invalide: <nom>; <phone>
@@ -73,7 +77,7 @@ Fonctionnalité: Automatisation des formulaires - Page souscription
     Lorsque L'on clique sur materiel <operateur>
     Et Saisir le cas d'un materiel vide et invalide: <nom>; <phone>; <materiel>
     Et L'on renseigne le numéro de matériel <operateur>
-    Alors Valider donc le formulaire
+    Alors Validation du formulaire
 
     Exemples: 
       | operateur | nom      | phone      | materiel      |
@@ -98,7 +102,7 @@ Fonctionnalité: Automatisation des formulaires - Page souscription
     Lorsque L'on clique sur materiel <operateur>
     Et L'on renseigne les champs nom et téléphone
     Et L'on renseigne le numéro de matériel <operateur>
-    Alors Valider donc le formulaire
+    Alors Validation du formulaire
 
     Exemples: 
       | operateur |
@@ -109,7 +113,7 @@ Fonctionnalité: Automatisation des formulaires - Page souscription
     Etant donné L'ouverture de la page souscription
     Lorsque L'on clique sur materiel <operateur>
     Et L'on renseigne le numéro de matériel <operateur>
-    Alors Valider donc le formulaire
+    Alors Validation du formulaire
 
     Exemples: 
       | operateur   |

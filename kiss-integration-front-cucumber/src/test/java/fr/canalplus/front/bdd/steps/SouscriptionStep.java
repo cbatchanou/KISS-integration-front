@@ -63,7 +63,7 @@ public class SouscriptionStep extends BaseIntegration {
 	@Lorsque("^L'on clique sur materiel (.*?)$")
 	public void click_sur_materiel(@Transform(OperateurTransformer.class) OperateurEnum operateurEnum)
 			throws InterruptedException, IOException {
-		switchBrowser(getOperateur(operateurEnum.toString()));
+		switchBrowser(By.xpath(getOperateur(operateurEnum.toString())));
 		assertEquals("MyCanal - Souscrire - Matériel", browserStackLocaldriver.getTitle());
 		Thread.sleep(5000);
 	}
@@ -97,13 +97,13 @@ public class SouscriptionStep extends BaseIntegration {
 
 	@Lorsque("^L'on clique sur voir les modalités de loffre et des services$")
 	public void voir_les_modalités_de_loffre_et_des_services() throws InterruptedException, IOException {
-		switchBrowser(link_modalite_offre);
+		switchBrowser(By.xpath(link_modalite_offre));
 		Thread.sleep(5000);
 	}
 
 	@Lorsque("^L'on clique sur en savoir plus sur les decodeurs compatibles$")
 	public void en_savoir_sur_les_décodeurs_compatibles() throws InterruptedException, IOException {
-		switchBrowser(link_decodeur_compatible);
+		switchBrowser(By.xpath(link_decodeur_compatible));
 		browserStackLocaldriver.switchTo().parentFrame();
 		Thread.sleep(5000);
 	}
@@ -117,13 +117,14 @@ public class SouscriptionStep extends BaseIntegration {
 	@Et("^L'on clique sur recevoir une parabole$")
 	public void click_sur_recevoir_une_parabole() throws InterruptedException {
 		browserStackLocaldriver.findElement(By.cssSelector("install-selection-button.opposite")).click();
-		waitForElementIsInvisible(By.cssSelector("div[class='bubblingG']"));
+		waitForElementIsInvisible(By.cssSelector("div[class='spinner']"));
+		Thread.sleep(5000);
 	}
 
 	@Et("^L'on clique sur jai deja une parabole$")
 	public void click_sur_jai_deja_une_parabole() throws InterruptedException {
 		browserStackLocaldriver.findElement(By.cssSelector("install-selection-button")).click();
-		Thread.sleep(10000);
+		Thread.sleep(5000);
 	}
 
 	@Alors("^Cliquer sur Continuer$")

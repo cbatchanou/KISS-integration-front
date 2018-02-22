@@ -15,6 +15,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -47,8 +48,8 @@ public class ModuleConfig {
 	public WebDriver browserStackLocalDriver() {
 		DesiredCapabilities capabilities = new DesiredCapabilities();
 		capabilities = getCapabilities();
-		capabilities.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
-		capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+		/*capabilities.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
+		capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);*/
 		try {
 			return (new BrowserstackSerenityDriver()).connectViaProxy(capabilities);
 		} catch (Exception e) {
@@ -74,6 +75,7 @@ public class ModuleConfig {
 		return map;
 	}
 	
+	@Bean(name="capabilities")
 	public DesiredCapabilities getCapabilities() {
 		String username = environment.getProperty("browserstack.user");
 		String accessKey = environment.getProperty("browserstack.key");
@@ -99,6 +101,8 @@ public class ModuleConfig {
 				}
 			}
 		}
+		capabilities.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
+		capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
 		System.setProperty("browserstack.local", "true");
 		return capabilities;
 	}

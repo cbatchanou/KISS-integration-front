@@ -11,6 +11,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
@@ -39,6 +40,10 @@ public abstract class BaseIntegration {
 	@Autowired
 	@Qualifier("browserStackLocalDriver")
 	public WebDriver browserStackLocaldriver;
+	
+	@Autowired
+	@Qualifier("capabilities")
+	public DesiredCapabilities capabilities;
 
 	@Autowired
 	public URI siteCanal;
@@ -94,7 +99,16 @@ public abstract class BaseIntegration {
 
 	@Value("#{'${elements.footer}'.split(',')}")
 	public String[] eltFooter;
+	
+	@Value("#{'${elements.livraisonRetraitBoutique}'.split(',')}")
+	public String[] retrait_boutique; 
 
+	@Value("#{'${elements.livraisonDomicile}'.split(',')}")
+	public String[] livraison_domicile;
+	
+	@Value("#{'${elements.recapitulatif}'.split(',')}")
+	public String[] recapitulatif; 
+	
 	@Value("${link.decodeurCompatible}")
 	public String link_decodeur_compatible;
 
@@ -130,6 +144,11 @@ public abstract class BaseIntegration {
 		WebDriverWait wait = new WebDriverWait(browserStackLocaldriver, 40);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
 	}
+	
+	public void waitForElementIsVisible(By by) {
+		WebDriverWait wait = new WebDriverWait(browserStackLocaldriver, 40);
+		wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(by));
+	}
 
 	public void getPageUrl() {
 		browserStackLocaldriver.manage().deleteAllCookies();
@@ -161,6 +180,7 @@ public abstract class BaseIntegration {
 		return email;
 	}
 
+	
 	public String getOperateur(String op) {
 		switch (op.toString()) {
 		case "BOUYGUES":
@@ -186,25 +206,57 @@ public abstract class BaseIntegration {
 		return op;
 
 	}
-	public void switchBrowser(String xpath) {
+	/* METHODE QUI RENVOIE LA REFERENCE DU TYPE DE MATERIEL PRECISE*/
+	public String refOperateur(String op) {
+		switch(op.toString()) {
+		case "BOUYGUES":
+			op = ConstantsWebElement.REF_BBOX;
+			break;
+		case "FREE":
+			op = ConstantsWebElement.REF_FREE;
+			break;
+		case "ORANGE":
+			op = ConstantsWebElement.REF_ORANGE;
+			break;
+		case "SFR":
+			op = ConstantsWebElement.REF_SFR;
+			break;
+		case "NUMERICABLE":
+			op = ConstantsWebElement.REF_NUMERICABLE;
+			break;
+		case "AUTRE":
+			op = ConstantsWebElement.REF_BBOX;
+			break;
+		}	
+	return op;
+		
+	}
+	
+	/*
+	 * cette methode permet de switcher entre les navigateurs. 
+	 * Le code n'etant pas pareil pour tous les navigateurs, 
+	 * cette methode me permet d'executer le code specifique pour X si le navigateur est X.  
+	 * 
+	 * */
+	public void switchBrowser(By locator) {
 		
 		switch (browserName) {
 		case "chrome":
-			WebElement element = browserStackLocaldriver.findElement(By.xpath(xpath));
+			WebElement element = browserStackLocaldriver.findElement(locator);
 			Actions clickerElement = new Actions(browserStackLocaldriver);
 			clickerElement.moveToElement(element, 0, 0).click().perform();
 			break;
 		case "firefox":
-			browserStackLocaldriver.findElement(By.xpath(xpath)).click();
+			browserStackLocaldriver.findElement(locator).click();
 			break;
 		case "IE":
-			browserStackLocaldriver.findElement(By.xpath(xpath)).click();
+			browserStackLocaldriver.findElement(locator).click();
 			break;
 		case "safari":
-			browserStackLocaldriver.findElement(By.xpath(xpath)).click();
+			browserStackLocaldriver.findElement(locator).click();
 			break;
 		case "edge":
-			browserStackLocaldriver.findElement(By.xpath(xpath)).click();
+			browserStackLocaldriver.findElement(locator).click();
 			break;
 		}
 	}
