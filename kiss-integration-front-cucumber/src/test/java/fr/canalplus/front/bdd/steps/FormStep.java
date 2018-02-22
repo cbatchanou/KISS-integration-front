@@ -438,6 +438,12 @@ public class FormStep extends BaseIntegration {
 		waitForElementIsInvisible(By.cssSelector("div[class='spinner']"));
 	}
 	
+	public void page_felicitation() {
+		assertEquals("MyCanal - Souscrire - Félicitations", browserStackLocaldriver.getTitle());
+		// Vérifier l'adresse de livraison
+		//verifier que l'offre de 
+	}
+	
 	@Alors("^Retour à la page mode de livraison$")
 	public void retour_page_precedente() {
 		browserStackLocaldriver.findElement(By.cssSelector("button.button.button-back")).click();

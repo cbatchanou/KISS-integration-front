@@ -24,10 +24,12 @@ Fonctionnalité: Automatisation des formulaires - Page souscription
     Et L'on renseigne les champs nom et téléphone
     Et L'on renseigne le numéro de matériel <operateur>
     Alors Validation du formulaire
+    Et Validation du recapitulatif du récap matériel <operateur>
+    Et Validation du paiement par CB <etat> IBAN
 
     Exemples: 
-      | operateur |
-      | ORANGE    |
+      | operateur | civility | Prenom   | Nom    | CodePostal | Adresse            | Mobile     | etat |
+      | ORANGE    |        1 | celestin | CARPIN |      87000 | avenue de La Borie | 0666565656 | sans |
 
   @op456 @fai
   Plan du Scénario: Souscription du materiel <operateur>
