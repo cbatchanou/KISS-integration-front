@@ -1,7 +1,8 @@
 #language: fr
-Fonctionnalité: Automatisation des formulaires - Page souscription
+@fai
+Fonctionnalité: Parcours souscription - FAI
 
-  @op12 @fai
+  @op12
   Plan du Scénario: Souscription du materiel <operateur>
     Etant donné L'ouverture de la page souscription
     Lorsque L'on clique sur materiel <operateur>
@@ -13,11 +14,11 @@ Fonctionnalité: Automatisation des formulaires - Page souscription
     Et Validation du paiement par CB <etat> IBAN
 
     Exemples: 
-      | operateur | civility | Prenom   | Nom    | CodePostal | Adresse             | Mobile     | etat |
-      | BOUYGUES  |        1 | celestin | CARPIN |      87000 | avenue de La Borie  | 0666565656 | sans |
-      | FREE      |        1 | Romane   | DIJON  |      75001 | 2 Rue de la liberté | 0266565656 | sans |
+      | operateur | civility | Prenom  | Nom    | CodePostal | Adresse             | Mobile     | etat |
+      | BOUYGUES  |        1 | hjgfhjh | CARPIN |      87000 | avenue de La Borie  | 0666565656 | sans |
+      | FREE      |        1 | Romane  | DIJON  |      75001 | 2 Rue de la liberté | 0266565656 | sans |
 
-  @op3 @fai
+  @op3
   Plan du Scénario: Souscription du materiel <operateur>
     Etant donné L'ouverture de la page souscription
     Lorsque L'on clique sur materiel <operateur>
@@ -28,10 +29,10 @@ Fonctionnalité: Automatisation des formulaires - Page souscription
     Et Validation du paiement par CB <etat> IBAN
 
     Exemples: 
-      | operateur | civility | Prenom   | Nom    | CodePostal | Adresse            | Mobile     | etat |
-      | ORANGE    |        1 | celestin | CARPIN |      87000 | avenue de La Borie | 0666565656 | sans |
+      | operateur | civility | Prenom    | Nom    | CodePostal | Adresse            | Mobile     | etat |
+      | ORANGE    |        1 | khjgfkhfk | CARPIN |      87000 | avenue de La Borie | 0666565656 | sans |
 
-  @op456 @fai
+  @op456
   Plan du Scénario: Souscription du materiel <operateur>
     Etant donné L'ouverture de la page souscription
     Lorsque L'on clique sur materiel <operateur>
@@ -45,13 +46,6 @@ Fonctionnalité: Automatisation des formulaires - Page souscription
       | AUTRE       |
       | SMARTTV     |
 
-  #
-  #
-  ## Formulaires invalides: Affichage des messages d'erreurs ##
-  #
-  #
-  #
-  @fai
   Plan du Scénario: <operateur>: Cas d'un nom invalide et d'un téléphone valide
     Etant donné L'ouverture de la page souscription
     Lorsque L'on clique sur materiel <operateur>
@@ -62,7 +56,6 @@ Fonctionnalité: Automatisation des formulaires - Page souscription
       | FREE      | SDJHCE658  | 0156785634 |
       | BOUYGUES  | QKJFH234Lµ | 0156785634 |
 
-  @fai
   Plan du Scénario: <operateur>: Cas d'un nom valide et d'un téléphone invalide
     Etant donné L'ouverture de la page souscription
     Lorsque L'on clique sur materiel <operateur>
@@ -73,8 +66,7 @@ Fonctionnalité: Automatisation des formulaires - Page souscription
       | FREE      | BILLANCOURT | 01565634 |
       | BOUYGUES  | CLERMOND    |          |
 
-  @fai @testa
-  Plan du Scénario: FORMULAIRE INVALIDE: <operateur>: cas d'un materiel vide et invalide
+  Plan du Scénario: <operateur>: cas d'un materiel vide et invalide
     Etant donné L'ouverture de la page souscription
     Lorsque L'on clique sur materiel <operateur>
     Et Saisir le cas d'un materiel vide et invalide: <nom>; <phone>; <materiel>
@@ -86,8 +78,7 @@ Fonctionnalité: Automatisation des formulaires - Page souscription
       | ORANGE    | qsdfqsfq | 0156453445 |               |
       | ORANGE    | kujyguy  | 0156453445 | 2345566776544 |
 
-  @fai
-  Plan du Scénario: FORMULAIRE INVALIDE: <operateur>: Cas d'un recap matériel vide
+  Plan du Scénario: <operateur>: Cas d'un recap matériel vide: afficher les bons messages d'erreurs
     Etant donné L'ouverture de la page souscription
     Lorsque L'on clique sur materiel <operateur>
     Et Saisir le cas d'un nom et d'un téléphone vides
@@ -98,8 +89,7 @@ Fonctionnalité: Automatisation des formulaires - Page souscription
       | BOUYGUES  |
       | ORANGE    |
 
-  @op3 @fai
-  Plan du Scénario: FORMULAIRE INVALIDE: <operateur>:
+  Plan du Scénario: <operateur>:
     Etant donné L'ouverture de la page souscription
     Lorsque L'on clique sur materiel <operateur>
     Et L'on renseigne les champs nom et téléphone
@@ -110,7 +100,6 @@ Fonctionnalité: Automatisation des formulaires - Page souscription
       | operateur |
       | ORANGE    |
 
-  @op456 @fai
   Plan du Scénario: FORMULAIRE INVALIDE: souscription du materiel <operateur>
     Etant donné L'ouverture de la page souscription
     Lorsque L'on clique sur materiel <operateur>

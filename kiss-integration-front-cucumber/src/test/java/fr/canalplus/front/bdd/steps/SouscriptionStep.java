@@ -30,6 +30,7 @@ public class SouscriptionStep extends BaseIntegration {
 	public void open_the_Firefox_and_launch_the_application() throws InterruptedException {
 		getPageUrl();
 		Thread.sleep(5000);
+		//assertEquals("Accueil - ESPACE CLIENT CANAL", browserStackLocaldriver.getTitle());
 		try {
 			assertEquals("MyCanal - Souscrire - Configuration matériel", browserStackLocaldriver.getTitle());
 			Thread.sleep(5000);

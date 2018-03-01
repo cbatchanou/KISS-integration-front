@@ -48,8 +48,6 @@ public class ModuleConfig {
 	public WebDriver browserStackLocalDriver() {
 		DesiredCapabilities capabilities = new DesiredCapabilities();
 		capabilities = getCapabilities();
-		/*capabilities.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
-		capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);*/
 		try {
 			return (new BrowserstackSerenityDriver()).connectViaProxy(capabilities);
 		} catch (Exception e) {
@@ -102,7 +100,7 @@ public class ModuleConfig {
 			}
 		}
 		capabilities.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
-		capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+		//capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
 		System.setProperty("browserstack.local", "true");
 		return capabilities;
 	}

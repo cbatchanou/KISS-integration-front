@@ -272,13 +272,14 @@ public class FormStep extends BaseIntegration {
 
 	@Alors("^Création d'une personne avec les données: (\\d+), (.*), (.*), (\\d+), (.*), (.*)$")
 	public void formulaireCreationDeCompte(int civility, String prenom, String nom, int codeP, String adresse, String mobile) {
-		waitForElementIsVisible(By.cssSelector("button.button.button-primary"));
-		assertEquals("Coordonnées", browserStackLocaldriver.findElement(By.cssSelector("li.done.active")).getText());
+		//waitForElementIsVisible(By.cssSelector("button.button.button-primary"));
+		
 		inputCivility(civility);
 		inputFirstName(prenom); inputLastName(nom);
 		inputZipCode(codeP); inputAdress(adresse);
 		inputMobile(mobile); inputEmail(getString());
 		inputPassword(getPassword());
+		assertEquals("Coordonnées", browserStackLocaldriver.findElement(By.cssSelector("li.done.active")).getText());
 		click_sur_conditionsGenerales(By.xpath(conditionsG));
 		
 		try {

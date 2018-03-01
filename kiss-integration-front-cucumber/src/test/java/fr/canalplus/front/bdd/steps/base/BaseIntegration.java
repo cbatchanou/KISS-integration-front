@@ -153,7 +153,6 @@ public abstract class BaseIntegration {
 	public void getPageUrl() {
 		browserStackLocaldriver.manage().deleteAllCookies();
 		browserStackLocaldriver.get(siteCanal.toString());
-		browserStackLocaldriver.get("https://boutique-recette.mycanal.fr/souscrire/offre?propalId=000012242");
 		waitForElementIsInvisible(By.cssSelector("div[class='spinner']"));
 	}
 
