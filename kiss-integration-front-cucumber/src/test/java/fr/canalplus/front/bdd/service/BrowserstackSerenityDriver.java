@@ -5,28 +5,24 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.NTCredentials;
-import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.CommandInfo;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.HttpCommandExecutor;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.http.HttpClient.Factory;
 
-import fr.canalplus.integration.common.services.interfaces.BeanInterface;
 import net.thucydides.core.util.EnvironmentVariables;
 import net.thucydides.core.util.SystemEnvironmentVariables;
 
-public class BrowserstackSerenityDriver implements BeanInterface{
+public class BrowserstackSerenityDriver {
 	
 	public RemoteWebDriver connectViaProxy(DesiredCapabilities capability) {
 
@@ -92,12 +88,6 @@ public class BrowserstackSerenityDriver implements BeanInterface{
 				return "Unknown";
 			}
 		}
-	}
-
-	@Override
-	public void doSomething() {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

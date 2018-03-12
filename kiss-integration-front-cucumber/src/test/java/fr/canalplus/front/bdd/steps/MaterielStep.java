@@ -5,69 +5,62 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+
 import org.openqa.selenium.By;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.BeforeSuite;
-import cucumber.api.java.fr.Et;
-import cucumber.api.Transform;
-import cucumber.api.java.fr.Alors;
-import cucumber.api.java.fr.Lorsque;
-import cucumber.api.java.fr.Etantdonné;
-import fr.canalplus.front.bdd.steps.base.BaseIntegration;
-import fr.canalplus.front.bdd.transformer.OperateurTransformer;
-import fr.canalplus.integration.common.enums.OperateurEnum;
 
-public class SouscriptionStep extends BaseIntegration {
-	private static final Logger LOGGER = LoggerFactory.getLogger(SouscriptionStep.class);
+import cucumber.api.java.fr.Alors;
+import cucumber.api.java.fr.Et;
+import cucumber.api.java.fr.Etantdonné;
+import cucumber.api.java.fr.Lorsque;
+import fr.canalplus.front.bdd.steps.base.BaseIntegration;
+
+public class MaterielStep extends BaseIntegration {
+	private static final Logger LOGGER = LoggerFactory.getLogger(MaterielStep.class);
 
 	@BeforeSuite
 	public void setUp() throws URISyntaxException {
 
 	}
 
-	@Etantdonné("^L'ouverture de la page souscription$")
-	public void open_the_Firefox_and_launch_the_application() throws InterruptedException {
-		getPageUrl();
+	@Etantdonné("^L'ouverture de la page souscription avec un propalId (.*)$")
+	public void open_the_Firefox_and_launch_the_application(String propalId) throws InterruptedException {
+		getPageUrl(propalId);
 		Thread.sleep(5000);
-		//assertEquals("Accueil - ESPACE CLIENT CANAL", browserStackLocaldriver.getTitle());
-		try {
-			assertEquals("MyCanal - Souscrire - Configuration matériel", browserStackLocaldriver.getTitle());
-			Thread.sleep(5000);
-		} catch (Exception e) {
-			LOGGER.info("Le titre de la page est incorrect");
-		}
+		assertEquals("MyCanal - Souscrire - Configuration matériel", browserStackLocaldriver.getTitle());
+		assertEquals("Matériel", browserStackLocaldriver.findElement(By.cssSelector("li.done.active")).getText());
+		Thread.sleep(3000);
 
 	}
 
-	@Et("^Retour a la page precedente$")
-	public void back_to_preview_page() {
-		browserStackLocaldriver.navigate().back();
-		waitForElementIsInvisible(By.cssSelector("div[class='spinner']"));
+	@Etantdonné("^Une offre sans engagement de propalId (.*)$")
+	public void UrlpourSansEngagement(String propalId) throws InterruptedException {
+		getPageUrl(propalId);
+		Thread.sleep(5000);
+		assertEquals("MyCanal - Souscrire - Identification", browserStackLocaldriver.getTitle());
+		assertEquals("Matériel", browserStackLocaldriver.findElement(By.cssSelector("li.done.active")).getText());
+		Thread.sleep(3000);
+
 	}
 
-	@Lorsque("^L'on clique sur le decodeur Canal$")
+	@Lorsque("^L'on clique sur le décodeur Canal$")
 	public void click_sur_Decodeur_Canal() throws InterruptedException {
-		browserStackLocaldriver.findElement(By.cssSelector(decodeur_canal)).click();
+		switchBrowser(By.cssSelector(decodeur_canal));
 		waitForElementIsInvisible(By.cssSelector("div[class='spinner']"));
 		assertEquals("MyCanal - Souscrire - Matériel", browserStackLocaldriver.getTitle());
 	}
 
-	@Lorsque("^L'on clique sur le decodeur Canal plus Le Cube$")
+	@Lorsque("^L'on clique sur le décodeur Canal plus Le Cube$")
 	public void click_sur_Le_Cube() throws InterruptedException, IOException {
-		// le cube ne passe pas avec le cssselector:: il se confond au decodeur canal
+		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 		browserStackLocaldriver.findElement(By.xpath(le_cube)).click();
+		System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
 		waitForElementIsInvisible(By.cssSelector("div[class='spinner']"));
 		assertEquals("MyCanal - Souscrire - Matériel", browserStackLocaldriver.getTitle());
 	}
 
-	@Lorsque("^L'on clique sur materiel (.*?)$")
-	public void click_sur_materiel(@Transform(OperateurTransformer.class) OperateurEnum operateurEnum)
-			throws InterruptedException, IOException {
-		switchBrowser(By.xpath(getOperateur(operateurEnum.toString())));
-		assertEquals("MyCanal - Souscrire - Matériel", browserStackLocaldriver.getTitle());
-		Thread.sleep(5000);
-	}
 
 	@Lorsque("^L'on clique sur materiel smartTV$")
 	public void click_sur_materiel_smartTV() throws InterruptedException, IOException {
@@ -90,28 +83,10 @@ public class SouscriptionStep extends BaseIntegration {
 		Thread.sleep(5000);
 	}
 
-	@Lorsque("^L'on clique sur en savoir plus sur les decodeurs canal$")
-	public void en_savoir_sur_les_décodeurs_canal() throws InterruptedException, IOException {
-		browserStackLocaldriver.findElement(By.cssSelector(link_decodeur_canal)).click();
-		Thread.sleep(5000);
-	}
-
-	@Lorsque("^L'on clique sur voir les modalités de loffre et des services$")
-	public void voir_les_modalités_de_loffre_et_des_services() throws InterruptedException, IOException {
-		switchBrowser(By.xpath(link_modalite_offre));
-		Thread.sleep(5000);
-	}
-
 	@Lorsque("^L'on clique sur en savoir plus sur les decodeurs compatibles$")
 	public void en_savoir_sur_les_décodeurs_compatibles() throws InterruptedException, IOException {
 		switchBrowser(By.xpath(link_decodeur_compatible));
 		browserStackLocaldriver.switchTo().parentFrame();
-		Thread.sleep(5000);
-	}
-
-	@Lorsque("^L'on clique sur voir le detail$")
-	public void click_sur_voir_le_detail() throws InterruptedException {
-		browserStackLocaldriver.findElement(By.xpath(link_voir_le_detail)).click();
 		Thread.sleep(5000);
 	}
 
@@ -135,39 +110,10 @@ public class SouscriptionStep extends BaseIntegration {
 		assertEquals("MyCanal - Souscrire - Identification", browserStackLocaldriver.getTitle());
 	}
 
-	@Et("^Verifier la presence entete page$") // elements.entete
-	public void verifier_la_presence_entete_page() {
-		for (int i = 0; i < eltHead.length; i++) {
-			assertTrue(isElementPresent(By.cssSelector(eltHead[i])));
-		}
-	}
-
-	@Et("^Verifier la presence du panier flottant$")
-	public void verifier_la_presence_du_panier_flottant() throws InterruptedException {
-		for (int i = 0; i < eltFooter.length; i++) {
-			assertTrue(isElementPresent(By.cssSelector(eltFooter[i])));
-		}
-	}
-
-	@Et("^Verifier que tous les elements de la page sont presents$")
-	public void verifier_que_tous_les_elements_de_la_page_sont_presents() throws InterruptedException {
-		for (int i = 0; i < eltHead.length; i++) {
-			assertTrue(isElementPresent(By.cssSelector(eltHead[i])));
-		}
-	}
-
-	@Et("^Verification des elements presents dans soucription decodeurs canal$")
+	@Et("^Vérification des éléments présents dans soucription décodeur canal$")
 	public void verification_des_elements_presents_dans_souscription_decodeurs_canal() throws InterruptedException {
 		for (int i = 0; i < elementsDECC.length; i++) {
 			assertTrue(isElementPresent(By.cssSelector(elementsDECC[i])));
-		}
-		Thread.sleep(5000);
-	}
-
-	@Et("^Verification des elements presents dans soucription tnt$")
-	public void verification_des_elements_dans_souscription_materiel_tnt() throws InterruptedException {
-		for (int i = 0; i < elementsTNT.length; i++) {
-			assertTrue(isElementPresent(By.cssSelector(elementsTNT[i])));
 		}
 		Thread.sleep(5000);
 	}

@@ -5,17 +5,11 @@ import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Map.Entry;
 
-import javax.annotation.PostConstruct;
-
-import org.apache.bcel.generic.IF_ACMPEQ;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -26,7 +20,6 @@ import org.springframework.core.env.AbstractEnvironment;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.MapPropertySource;
 
-import bsh.Capabilities;
 import fr.canalplus.front.bdd.service.BrowserstackSerenityDriver;
 
 @Configuration
@@ -38,13 +31,7 @@ public class ModuleConfig {
 	@Autowired
 	private Environment environment;
 
-	/*@Bean(name = "chromeDriver")
-	public WebDriver chromeDriver() throws URISyntaxException {
-		System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
-		return new ChromeDriver();
-	}*/
-	
-	@Bean(name = "browserStackLocalDriver")
+	@Bean(name = "browserStackLocalDriver", destroyMethod = "quit")
 	public WebDriver browserStackLocalDriver() {
 		DesiredCapabilities capabilities = new DesiredCapabilities();
 		capabilities = getCapabilities();
@@ -83,7 +70,7 @@ public class ModuleConfig {
 		Map<String, Object> map = displayAllProperties();
 
 		for (Map.Entry<String, Object> entry : map.entrySet()) {
-			String key = (String) entry.getKey();
+			String key = entry.getKey();
 
 			if (key.equals("browserstack.key") || key.equals("browserstack.user")
 					|| key.equals("browserstack.server")) {
@@ -100,7 +87,7 @@ public class ModuleConfig {
 			}
 		}
 		capabilities.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
-		//capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+		// capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
 		System.setProperty("browserstack.local", "true");
 		return capabilities;
 	}

@@ -1,9 +1,6 @@
 package fr.canalplus.front.bdd.steps.base;
 
-import static org.junit.Assert.assertTrue;
-
 import java.net.URI;
-import java.util.Map.Entry;
 import java.util.NoSuchElementException;
 import java.util.Properties;
 
@@ -14,18 +11,11 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestExecutionListeners;
-import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
-import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
-import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
 import fr.canalplus.front.bdd.ModuleConfig;
 import fr.canalplus.integration.bdd.DBConfig;
@@ -90,15 +80,6 @@ public abstract class BaseIntegration {
 
 	@Value("#{'${elements.decodeursCanal}'.split(',')}")
 	public String[] elementsDECC;
-
-	@Value("#{'${elements.tnt}'.split(',')}")
-	public String[] elementsTNT;
-
-	@Value("#{'${elements.head}'.split(',')}")
-	public String[] eltHead;
-
-	@Value("#{'${elements.footer}'.split(',')}")
-	public String[] eltFooter;
 	
 	@Value("#{'${elements.livraisonRetraitBoutique}'.split(',')}")
 	public String[] retrait_boutique; 
@@ -108,15 +89,12 @@ public abstract class BaseIntegration {
 	
 	@Value("#{'${elements.recapitulatif}'.split(',')}")
 	public String[] recapitulatif; 
-	
+
 	@Value("${link.decodeurCompatible}")
 	public String link_decodeur_compatible;
 
 	@Value("${link.decodeurCanal}")
 	public String link_decodeur_canal;
-
-	@Value("${link.voirledetail}")
-	public String link_voir_le_detail;
 
 	@Value("${link.modalitesOffre}")
 	public String link_modalite_offre;
@@ -150,36 +128,45 @@ public abstract class BaseIntegration {
 		wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(by));
 	}
 
-	public void getPageUrl() {
+	public void getPageUrl(String propalId) {
 		browserStackLocaldriver.manage().deleteAllCookies();
 		browserStackLocaldriver.get(siteCanal.toString());
+		browserStackLocaldriver.get("https://boutique-recette.mycanal.fr/souscrire/offre?propalId=" + propalId);
 		waitForElementIsInvisible(By.cssSelector("div[class='spinner']"));
 	}
 
-	public String getPassword() {
-		String pass = "";
-		String possible = "abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-		for (int x = 0; x < 15; x++) {
-			int i = (int) Math.floor(Math.random() * 62);
-			pass += possible.charAt(i);
-		}
-		return pass;
+	public void ClearBrowserCache() throws InterruptedException {
+		browserStackLocaldriver.manage().getCookies().clear();
+		browserStackLocaldriver.manage().getCookies();
+		Thread.sleep(5000);
 	}
 
-	public String getString() {
-		String email = "";
-		String possible = "abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-		for (int x = 0; x < 8; x++) {
-			int i = (int) Math.floor(Math.random() * 62);
-			email += possible.charAt(i);
-		}
-		email += "@yopmail.com";
-		return email;
+	public void prix_offre() {
 	}
 
+	public void detail_panier() throws InterruptedException {
+	}
+
+	public void inputfield(org.openqa.selenium.By by, Object field) {
+		browserStackLocaldriver.findElement(by).clear();
+		browserStackLocaldriver.findElement(by).sendKeys(field.toString());
+	}
+
+
+	public void valider() throws InterruptedException {
+		browserStackLocaldriver.findElement(By.cssSelector(continuer)).click();
+		waitForElementIsInvisible(By.cssSelector("div[class='spinner']"));
+		Thread.sleep(5000);
+	}
+
+	public void retour() {
+		browserStackLocaldriver.findElement(By.cssSelector("button.button.button-back")).click();
+	}
 	
+	public void click_sur_conditionsGenerales(org.openqa.selenium.By locator) {
+		switchBrowser(locator);
+	}
+
 	public String getOperateur(String op) {
 		switch (op.toString()) {
 		case "BOUYGUES":
@@ -205,31 +192,6 @@ public abstract class BaseIntegration {
 		return op;
 
 	}
-	/* METHODE QUI RENVOIE LA REFERENCE DU TYPE DE MATERIEL PRECISE*/
-	public String refOperateur(String op) {
-		switch(op.toString()) {
-		case "BOUYGUES":
-			op = ConstantsWebElement.REF_BBOX;
-			break;
-		case "FREE":
-			op = ConstantsWebElement.REF_FREE;
-			break;
-		case "ORANGE":
-			op = ConstantsWebElement.REF_ORANGE;
-			break;
-		case "SFR":
-			op = ConstantsWebElement.REF_SFR;
-			break;
-		case "NUMERICABLE":
-			op = ConstantsWebElement.REF_NUMERICABLE;
-			break;
-		case "AUTRE":
-			op = ConstantsWebElement.REF_BBOX;
-			break;
-		}	
-	return op;
-		
-	}
 	
 	/*
 	 * cette methode permet de switcher entre les navigateurs. 
@@ -237,6 +199,7 @@ public abstract class BaseIntegration {
 	 * cette methode me permet d'executer le code specifique pour X si le navigateur est X.  
 	 * 
 	 * */
+
 	public void switchBrowser(By locator) {
 		
 		switch (browserName) {
@@ -259,4 +222,5 @@ public abstract class BaseIntegration {
 			break;
 		}
 	}
+
 }

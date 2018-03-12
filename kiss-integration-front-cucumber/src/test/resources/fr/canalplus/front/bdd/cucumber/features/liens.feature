@@ -1,9 +1,13 @@
 #language: fr
 Fonctionnalité: Autmatisation des liens de la boutique
 
-  @test
-  Scénario: test de l'url
-    Etant donné L'ouverture de la page souscription
+  @url
+  Plan du Scénario: test de l'url
+    Etant donné L'ouverture de la page souscription avec un propalId <propalId>
+
+    Exemples: 
+      | propalId  |
+      | 000017130 |
 
   @liencanal @lien
   Scénario: Scénario de vérification du lien : En savoir plus sur les décodeurs CANAL
@@ -21,7 +25,7 @@ Fonctionnalité: Autmatisation des liens de la boutique
     Lorsque L'on clique sur voir les modalités de loffre et des services
 
   @voirdetail @lien
-  Scénario: Scénario de vérification du lien : Voir le detail
+  Scénario: Scénario de vérification du lien : Voir le detail 
     Etant donné L'ouverture de la page souscription
     Lorsque L'on clique sur voir le detail
 

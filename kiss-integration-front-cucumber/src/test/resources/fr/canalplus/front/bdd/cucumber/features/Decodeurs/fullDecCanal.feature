@@ -1,5 +1,5 @@
 #language: fr
-@full
+@Canal
 Fonctionnalité: Parcours souscription - Decodeurs CANAL
 
   ## Step recevoir une parabole ##
@@ -106,5 +106,33 @@ Fonctionnalité: Parcours souscription - Decodeurs CANAL
     Exemples: 
       | civility | Prenom  | Nom       | CodePostal | Adresse            | Mobile     | etat |
       |        2 | carolle | Firmament |      87000 | avenue de La Borie | 0666565656 | avec |
+
+  Plan du Scénario: Souscription Full 12 mois SAT G9 - recevoir la parabole
+    Etant donné L'ouverture de la page souscription avec un propalId <propalId>
+    Et Vérifier la présence entete page
+    Et Vérifier la présence du panier flottant
+    Lorsque L'on clique sur le décodeur Canal
+    Et Vérification des éléments présents dans soucription décodeur canal
+    Et L'on clique sur recevoir une parabole
+    Alors Création d'une personne avec les données: <civility>, <Prenom>, <Nom>, <CodePostal>, <Adresse>, <Mobile>
+    Et Choix du retrait en 1h en boutique
+
+    Exemples: 
+      | civility | Prenom   | Nom    | CodePostal | Adresse            | Mobile     | etat | propalId  |
+      |        1 | celestin | CARPIN |      87000 | avenue de La Borie | 0666565656 | sans | 000012248 |
+
+  Plan du Scénario: Souscription Full 12 mois SAT G9 - a déjà une parabole
+    Etant donné L'ouverture de la page souscription avec un propalId <propalId>
+    Et Vérifier la présence entete page
+    Et Vérifier la présence du panier flottant
+    Lorsque L'on clique sur le décodeur Canal
+    Et Vérification des éléments présents dans soucription décodeur canal
+    Et L'on clique sur recevoir une parabole
+    Alors Création d'une personne avec les données: <civility>, <Prenom>, <Nom>, <CodePostal>, <Adresse>, <Mobile>
+    Et Choix du retrait en 1h en boutique
+
+    Exemples: 
+      | civility | Prenom | Nom    | CodePostal | Adresse     | Mobile     | etat | propalId  |
+      |        1 | ghtyht | CARPIN |      87000 | rthrthrthrt | 0666565656 | sans | 000012248 |
 
   

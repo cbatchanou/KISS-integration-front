@@ -3,8 +3,8 @@ package fr.canalplus.front.bdd.steps.base;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public final class ConstantsWebElement {
-	private static final Logger LOGGER = LoggerFactory.getLogger(ConstantsWebElement.class);
+public final class Constants {
+	private static final Logger LOGGER = LoggerFactory.getLogger(Constants.class);
 	public static final String DECODEUR_CANAL = "";
 	public static final String DECODEUR_CANAL_CUBE = "";
 	
@@ -38,6 +38,7 @@ public final class ConstantsWebElement {
 	public static final String REF_BBOX = "085MF1";
 	public static final String REF_NUMERICABLE = "038MF1";
 	
+	public static final String PRIX_OFFRE_24CECS = "44,90€";
 	
 	public static final String breadcrum_main="/html/body/div[2]/ui-view/subscription-full/div/breadcrumb/div/div[2]/ul";  
 	public static final String breadcrum_offre="/html/body/div[2]/ui-view/subscription-full/div/breadcrumb/div/div[2]/ul/li[1]";
@@ -47,6 +48,18 @@ public final class ConstantsWebElement {
 	public static final String breadcrum_Recapitulatif="/html/body/div[2]/ui-view/subscription-full/div/breadcrumb/div/div[2]/ul/li[5]";
 	public static final String breadcrum_paiement="/html/body/div[2]/ui-view/subscription-full/div/breadcrumb/div/div[2]/ul/li[6]";
 	
+	public static final String[] elementsPanierflottant = { "div.cart-footer-content", "a.show-modal",
+			"span.price-footer" };
+	public static final String[] elementsEntete = { "div.logo", "div.click-call", "div.secured-space" };
+	public static final String[] elementsTNT24 = { "div.visuel", "span.free", "span.guarantee", "h1", "a",
+			"span.price-footer", "a.show-modal", "div.offer-price.offer-price-no-promo" };
+	// "div.offer-price-amount-container", "span.offer-price-promo",
+	// "span;price-footer", "a.show-modal",
+	// "div.offer-reco", "a" };
+	public static final String[] elementsFelication = { "span.firstname", "span.email.strong",
+			"button.button.button-primary" };
+	public static final String lienVoirDetail = "/html/body/div[2]/ui-view/subscription-full/footer-cart/section/div/a";
+	public static final String conditionsG = "/html/body/div[2]/ui-view/subscription-full/div/ui-view/subscription-full-auth/div/div/form/div[6]/label/div";
 	public static String generateIban() {
         // TODO: a refaire
         StringBuilder iban = new StringBuilder();
@@ -80,6 +93,52 @@ public final class ConstantsWebElement {
         }
         return iban.toString();
     }
+
+	public static String getPassword() {
+		String pass = "";
+		String possible = "abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+		for (int x = 0; x < 15; x++) {
+			int i = (int) Math.floor(Math.random() * 62);
+			pass += possible.charAt(i);
+		}
+		return pass;
+	}
+
+	public static String getString() {
+		String email = "";
+		String possible = "abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+		for (int x = 0; x < 8; x++) {
+			int i = (int) Math.floor(Math.random() * 62);
+			email += possible.charAt(i);
+		}
+		email += "@yopmail.com";
+		return email;
+	}
 	
-	
+	public static String refOperateur(String op) {
+		switch (op.toString()) {
+		case "BOUYGUES":
+			op = REF_BBOX;
+			break;
+		case "FREE":
+			op = REF_FREE;
+			break;
+		case "ORANGE":
+			op = REF_ORANGE;
+			break;
+		case "SFR":
+			op = REF_SFR;
+			break;
+		case "NUMERICABLE":
+			op = REF_NUMERICABLE;
+			break;
+		case "AUTRE":
+			op = REF_BBOX;
+			break;
+		}
+		return op;
+
+	}
 }
