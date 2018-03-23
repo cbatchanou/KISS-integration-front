@@ -111,3 +111,57 @@ Fonctionnalité: Parcours souscription - FAI
       | SFR         |
       | NUMERICABLE |
       | AUTRE       |
+
+
+  ## Nouveau cas de tests pour le nouvel affichage
+  @test1  @new
+  Plan du Scénario: Souscription Full 12 mois FAI pour free et bbox
+    Etant donné L'ouverture de la page
+    Et Le choix d'un materiel
+    Lorsque L'on choisit la Box TV opérateur
+    Et Que l'on clique sur le materiel <operateur>
+    Et En remplissant le formulaire <operateur>: <Nom>, <Mobile> et n°materiel
+    Alors Création d'une personne avec les données: <civility>, <Prenom>, <Nom>, <CodePostal>, <Adresse>, <Mobile>
+    Alors Récapitulatif de l'offre
+    Alors Validation du paiement par CB <status> IBAN
+    Et Vérifier que les données de la page félicitation sont correctes
+
+    Exemples: 
+      | operateur | civility | Prenom   | Nom      | CodePostal | Adresse        | Mobile     | status |
+      | BOUYGUES  |        1 | Clara    | DAVIAUD  |      75010 | clavier azerty | 0225623562 | sans   |
+      | FREE      |        1 | Stephane | CLERMOND |      75010 | clavier azerty | 0225623562 | sans   |
+
+  @test2  @new
+  Plan du Scénario: Souscription Full 12 mois FAI pour orange et sfr
+    Etant donné L'ouverture de la page
+    Et Le choix d'un materiel
+    Lorsque L'on choisit la Box TV opérateur
+    Et Que l'on clique sur le materiel <operateur>
+    Et En remplissant le formulaire <operateur>: <Nom>, <Mobile> et n°materiel
+    Alors Création d'une personne avec les données: <civility>, <Prenom>, <Nom>, <CodePostal>, <Adresse>, <Mobile>
+    Alors Récapitulatif de l'offre
+    Alors Validation du paiement par CB <status> IBAN
+    Et Vérifier que les données de la page félicitation sont correctes
+
+    Exemples: 
+      | operateur | civility | Prenom    | Nom      | CodePostal | Adresse        | Mobile     | status |
+      | ORANGE    |        1 | sebastien | DUPOND   |      75010 | clavier azerty | 0225623562 | sans   |
+      | SFR       |        2 | Sara      | BEUCHAMP |      21000 | clavier azerty | 0523562323 | sans   |
+
+  @test3  @new
+  Plan du Scénario: Souscription Full 12 mois FAI pour numericable et autre
+    Etant donné L'ouverture de la page
+    Et Le choix d'un materiel
+    Lorsque L'on choisit la Box TV opérateur
+    Et Que l'on clique sur le materiel <operateur>
+    Et En remplissant le formulaire <operateur>: <Nom>, <Mobile> et n°materiel
+    Alors Création d'une personne avec les données: <civility>, <Prenom>, <Nom>, <CodePostal>, <Adresse>, <Mobile>
+    Et Choix du retrait en 1h en boutique
+    Alors Récapitulatif de l'offre
+    Alors Validation du paiement par CB <status> IBAN
+    Et Vérifier que les données de la page félicitation sont correctes
+
+    Exemples: 
+      | operateur   | civility | Prenom   | Nom  | CodePostal | Adresse        | Mobile     | status |
+      | NUMERICABLE |        1 | Etienne  | DEEP |      87000 | clavier azerty | 0356235623 | sans   |
+      | AUTRE       |        2 | Emmanuel | DEEP |      87000 | clavier azerty | 0123562356 | sans   |

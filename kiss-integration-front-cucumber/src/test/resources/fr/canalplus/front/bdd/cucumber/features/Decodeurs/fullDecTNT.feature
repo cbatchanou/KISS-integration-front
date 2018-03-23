@@ -4,7 +4,7 @@ Fonctionnalité: Parcours souscription - TNT
   @TNTrelais
   Plan du Scénario: Souscription Full 24 mois TNT - Livraison Point Relais
     Etant donné L'ouverture de la page souscription avec un propalId <propalId>
-    Lorsque L'on clique sur le décodeur Canal plus Le Cube
+    Lorsque L'on choisit le Décodeur plus Le Cube
     Et Vérifier la présence du panier flottant
     Et Vérifier la présence entete page
     Et Vérification des éléments présents dans soucription tnt 24 mois
@@ -21,7 +21,7 @@ Fonctionnalité: Parcours souscription - TNT
 
   Plan du Scénario: Souscription Full 24 mois TNT - Livraison à domicile et paiement IBAN
     Etant donné L'ouverture de la page souscription avec un propalId <propalId>
-    Lorsque L'on clique sur le décodeur Canal plus Le Cube
+    Lorsque L'on choisit le Décodeur plus Le Cube
     Et Vérifier la présence du panier flottant
     Et Vérifier la présence entete page
     Et Vérification des éléments présents dans soucription tnt 24 mois
@@ -38,7 +38,7 @@ Fonctionnalité: Parcours souscription - TNT
 
   Plan du Scénario: Souscription Full 24 mois TNT - en boutique et paiement IBAN
     Etant donné L'ouverture de la page souscription avec un propalId <propalId>
-    Lorsque L'on clique sur le décodeur Canal plus Le Cube
+    Lorsque L'on choisit le Décodeur plus Le Cube
     Et Vérifier la présence du panier flottant
     Et Vérifier la présence entete page
     Et Vérification des éléments présents dans soucription tnt 24 mois

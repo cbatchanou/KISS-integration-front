@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import org.openqa.selenium.By;
 
+import cucumber.api.java.fr.Alors;
 import cucumber.api.java.fr.Et;
 import cucumber.api.java.fr.Lorsque;
 import fr.canalplus.front.bdd.steps.base.BaseIntegration;
@@ -30,7 +31,7 @@ public class CommonStep extends BaseIntegration {
 	// LIEN VOIR LES MODALITES DE L'OFFRE ET DES SERVICES
 	@Lorsque("^L'on clique sur voir les modalités de loffre et des services$")
 	public void voir_les_modalités_de_loffre_et_des_services() throws InterruptedException, IOException {
-		switchBrowser(By.xpath(link_modalite_offre));
+		switchBrowser(By.xpath(Constants.lienModalitesOffre));
 		Thread.sleep(5000);
 	}
 
@@ -49,4 +50,10 @@ public class CommonStep extends BaseIntegration {
 			assertTrue(isElementPresent(By.cssSelector(Constants.elementsPanierflottant[i])));
 		}
 	}
+
+	@Alors("^Retour à la page mode de livraison$")
+	public void retour_livraison() {
+		retour();
+	}
+
 }

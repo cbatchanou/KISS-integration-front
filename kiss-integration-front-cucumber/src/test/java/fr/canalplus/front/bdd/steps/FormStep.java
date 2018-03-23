@@ -88,20 +88,20 @@ public class FormStep extends BaseIntegration {
 		Subscriber subscriber = subscriberContext().find(10214344);
 		inputfield(org.openqa.selenium.By.id("name"), Constants.getPassword());
 		inputfield(org.openqa.selenium.By.id("phone"), Constants.getString());
-		valider();
+		confirmer();
 		assertEquals("Veuillez saisir un nom valide",
 				browserStackLocaldriver.findElement(By.xpath("//div[1]/div[3]/p[1]")).getText());
 		assertEquals("Veuillez saisir un numéro de téléphone valide",
 				browserStackLocaldriver.findElement(By.xpath("//div[1]/div[3]/p[2]")).getText());
 
 		inputfield(org.openqa.selenium.By.id("name"), subscriber.getNom());
-		valider();
+		confirmer();
 		assertEquals("Veuillez saisir un numéro de téléphone valide",
 				browserStackLocaldriver.findElement(By.xpath("//div[1]/div[3]/p[2]")).getText());
 		inputfield(org.openqa.selenium.By.id("name"), Constants.getPassword());
 		inputfield(org.openqa.selenium.By.id("phone"), subscriber.getPhone());
 
-		valider();
+		confirmer();
 		assertEquals("Veuillez saisir un nom valide",
 				browserStackLocaldriver.findElement(By.xpath("//div[1]/div[3]/p[1]")).getText());
 	}
@@ -127,10 +127,11 @@ public class FormStep extends BaseIntegration {
 	}
 
 	@Et("^L'on renseigne les champs nom et téléphone$")
-	public void input_name_and_phone() {
+	public void input_name_and_phone() throws InterruptedException {
 		Subscriber subscriber = subscriberContext().find(10214344);
 		inputfield(org.openqa.selenium.By.id("name"), subscriber.getNom());
 		inputfield(org.openqa.selenium.By.id("phone"), subscriber.getPhone());
+		confirmer();
 	}
 
 	@Et("^Renseigner un (.*) et un (.*)$")
@@ -141,7 +142,7 @@ public class FormStep extends BaseIntegration {
 		browserStackLocaldriver.findElement(By.id("sso-pass")).clear();
 		browserStackLocaldriver.findElement(By.id("sso-pass")).sendKeys(password);
 		click_sur_reCAPTCHA();
-		valider();
+		confirmer();
 
 	}
 
@@ -150,7 +151,7 @@ public class FormStep extends BaseIntegration {
 		inputfield(org.openqa.selenium.By.id("name"), name);
 		inputfield(org.openqa.selenium.By.id("phone"), phone);
 
-		valider();
+		confirmer();
 		assertTrue(Constants.NOM_INVALIDE, isElementPresent(By.xpath("//subscription-full-material/div/div[3]/p[1]")));
 	}
 
@@ -158,7 +159,7 @@ public class FormStep extends BaseIntegration {
 	public void formulaire_recap_phone_invalide(String name, String phone) throws InterruptedException {
 		inputfield(org.openqa.selenium.By.id("name"), name);
 		inputfield(org.openqa.selenium.By.id("phone"), phone);
-		valider();
+		confirmer();
 		assertTrue(Constants.TELEPHONE_INVALIDE,
 				isElementPresent(By.xpath("//subscription-full-material/div/div[3]/p[2]")));
 	}
@@ -171,13 +172,13 @@ public class FormStep extends BaseIntegration {
 		tooltip_info();
 
 		if (materiel.equals("") || materiel == null) {
-			valider();
+			confirmer();
 			assertTrue(Constants.MATERIEL_VIDE,
 					isElementPresent(By.xpath("//subscription-full-material/div/div[3]p[3]")));
 			Thread.sleep(3000);
 		} else {
 			inputfield(org.openqa.selenium.By.id("numMaterial"), materiel);
-			valider();
+			confirmer();
 			waitForElementIsInvisible(By.cssSelector("div[class='spinner']"));
 			assertTrue(Constants.MATERIEL_INVALIDE,
 					isElementPresent(By.xpath("//subscription-full-material/div/div[3]p[3]")));
@@ -189,7 +190,7 @@ public class FormStep extends BaseIntegration {
 
 	@Et("^Saisir le cas d'un nom et d'un téléphone vides $")
 	public void formulaire_recap_invalide(String name, String phone) throws InterruptedException {
-		valider();
+		confirmer();
 		assertTrue(Constants.NOM_INVALIDE, isElementPresent(By.xpath("//subscription-full-material/div/div[3]/p[1]")));
 		assertTrue(Constants.TELEPHONE_INVALIDE,
 				isElementPresent(By.xpath("//subscription-full-material/div/div[3]/p[2]")));
@@ -207,14 +208,4 @@ public class FormStep extends BaseIntegration {
 		assertTrue(isElementPresent(By.xpath("//div/div[2]/div[2]/input-tooltipped/div/div[2]/div[1]/i")));
 		assertTrue(isElementPresent(By.xpath("//div/div[2]/div[1]/div[2]/input-tooltipped/div/div[2]/div[1]/i")));
 	}
-
-	public void page_felicitation() {
-		assertEquals("MyCanal - Souscrire - Félicitations", browserStackLocaldriver.getTitle());
-	}
-
-	@Alors("^Retour à la page mode de livraison$")
-	public void retour_livraison() {
-		retour();
-	}
-
 }

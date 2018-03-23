@@ -3,8 +3,13 @@ package fr.canalplus.front.bdd.steps;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.List;
+
+import org.openqa.selenium.WebElement;
+
 import cucumber.api.java.fr.Et;
 import fr.canalplus.front.bdd.steps.base.BaseIntegration;
+import fr.canalplus.front.bdd.steps.base.Constants;
 import net.serenitybdd.core.annotations.findby.By;
 
 public class ModeDeLivraisonStep extends BaseIntegration {
@@ -12,6 +17,7 @@ public class ModeDeLivraisonStep extends BaseIntegration {
 	public void mode_livraison() throws InterruptedException {
 		waitForElementIsVisible(By.cssSelector("h1"));
 		assertEquals("MyCanal - Souscrire - Livraison", browserStackLocaldriver.getTitle());
+		assertEquals("Livraison", browserStackLocaldriver.findElement(By.cssSelector("li.done.active")).getText());
 		assertTrue(isElementPresent(By.cssSelector("ul.container.delivery-bloc")));
 		assertTrue(isElementPresent(By.cssSelector("h1")));
 		Thread.sleep(5000);
@@ -21,71 +27,102 @@ public class ModeDeLivraisonStep extends BaseIntegration {
 	@Et("^Choix du retrait en 1h en boutique$")
 	public void retrait_en_boutique() throws InterruptedException {
 		mode_livraison();
-		assertEquals("Livraison", browserStackLocaldriver.findElement(By.cssSelector("li.done.active")).getText());
-		// browserStackLocaldriver.findElement(By.cssSelector("html body div ui-view
-		// subscription-full ")).click();
-		switchBrowser(By.xpath("//div/ui-view/subscription-full-delivery/div/ul/li[1]"));
-		waitForElementIsInvisible(By.cssSelector("div[class='spinner']"));
-		for (int i = 0; i < retrait_boutique.length; i++) {
-			assertTrue(isElementPresent(By.cssSelector(retrait_boutique[i])));
+		typeLivraison(0);
+		for (int i = 0; i < Constants.ElementRetraitBoutique.length; i++) {
+			assertTrue(isElementPresent(By.cssSelector(Constants.ElementRetraitBoutique[i])));
 		}
-		String[] elt = { "L21332", "P13981", "X16877", "M19587", "V17837", "M17839" };
-		int i = (int) Math.floor(Math.random() * (elt.length));
-		String id = "anchor" + elt[i];
-		browserStackLocaldriver.findElement(By.id(id)).click();
-		browserStackLocaldriver.findElement(By.cssSelector("div.action")).click();
+		WebElement section = browserStackLocaldriver.findElement(By.className("drop-off-points-content"));
+		List<WebElement> items = section.findElements(By.tagName("delivery-store"));
+		int i = (int) Math.floor(Math.random() * (items.size()));
+		items.get(i).click();
+		browserStackLocaldriver
+				.findElement(By.xpath("//*[@id=\"" + items.get(i).getAttribute("id") + "\"]/div[2]/button")).click();
+		Thread.sleep(5000);
+		waitForElementIsInvisible(By.cssSelector("div[class='spinner']"));
+	}
+
+	public void findId() {
+		WebElement section = browserStackLocaldriver.findElement(By.className("drop-off-points-content"));
+		List<WebElement> items = section.findElements(By.tagName("delivery-store"));
+		int i = (int) Math.floor(Math.random() * (items.size()));
+		items.get(i).click();
+	}
+
+	public void typeLivraison(int livraison) {
+		WebElement section = browserStackLocaldriver.findElement(By.cssSelector("ul.container.delivery-bloc"));
+		List<WebElement> items = section.findElements(By.tagName("li"));
+		items.get(livraison).click();
 		waitForElementIsInvisible(By.cssSelector("div[class='spinner']"));
 	}
 
 	@Et("^Choix du retrait en 72h à domicile$")
 	public void livraison_a_domicile() throws InterruptedException {
 		mode_livraison();
-		assertEquals("Livraison", browserStackLocaldriver.findElement(By.cssSelector("li.done.active")).getText());
-		switchBrowser(By.xpath("//div/ui-view/subscription-full-delivery/div/ul/li[2]"));
-		waitForElementIsInvisible(By.cssSelector("div[class='spinner']"));
-		assertEquals("MyCanal - Souscrire - Livraison", browserStackLocaldriver.getTitle());
-		for (int i = 0; i < livraison_domicile.length; i++) {
-			assertTrue(isElementPresent(By.cssSelector(livraison_domicile[i])));
+		typeLivraison(1);
+		for (int i = 0; i < Constants.ElementLivraisonDomicile.length; i++) {
+			assertTrue(isElementPresent(By.cssSelector(Constants.ElementLivraisonDomicile[i])));
 		}
-		valider();
+		browserStackLocaldriver.findElement(By.cssSelector("button.button.button-primary")).click();
 		waitForElementIsInvisible(By.cssSelector("div[class='spinner']"));
+		Thread.sleep(5000);
+	}
+
+	@Et("^Choix du retrait en 72h à domicile avec changement d'adresse (.*), (.*)$")
+	public void LDEtChangementAdresse(String zipCodeBis, String streetNameBis) throws InterruptedException {
+		mode_livraison();
+		typeLivraison(1);
+		for (int i = 0; i < Constants.ElementLivraisonDomicile.length; i++) {
+			assertTrue(isElementPresent(By.cssSelector(Constants.ElementLivraisonDomicile[i])));
+		}
+		String adresseAvant = browserStackLocaldriver.findElement(By.cssSelector("p.address")).getText();
+
+		/* CHANGEMENT D'ADRESSE */
+		switchBrowser(By.linkText("Modifier l'adresse"));
+		Thread.sleep(2000);
+		inputfield(org.openqa.selenium.By.name("zipCode"), zipCodeBis);
+		inputfield(org.openqa.selenium.By.name("streetName"), streetNameBis);
+		switchBrowser(By.cssSelector("button.button.button-primary"));
+		Thread.sleep(2000);
+		String adresseApres = browserStackLocaldriver.findElement(By.cssSelector("p.address")).getText();
+		Thread.sleep(2000);
+		browserStackLocaldriver.findElement(By.cssSelector("button.button.button-primary")).click();
+		waitForElementIsInvisible(By.cssSelector("div[class='spinner']"));
+		Thread.sleep(2000);
 	}
 
 	@Et("^Choix de la livraison en 72h en point relais$")
 	public void livraison_en_point_relais() throws InterruptedException {
 		mode_livraison();
-		assertEquals("Livraison", browserStackLocaldriver.findElement(By.cssSelector("li.done.active")).getText());
-		switchBrowser(By.xpath("//div/ui-view/subscription-full-delivery/div/ul/li[3]"));
-		waitForElementIsInvisible(By.cssSelector("div[class='spinner']"));
-		assertEquals("MyCanal - Souscrire - Livraison", browserStackLocaldriver.getTitle());
-		for (int i = 0; i < retrait_boutique.length; i++) {
-			assertTrue(isElementPresent(By.cssSelector(retrait_boutique[i])));
-		}
+		typeLivraison(2);
 
-		String[] element = { "4077S", "3440S", "4074S", "2968R" };
-		int i = (int) Math.floor(Math.random() * (element.length));
-		String id = "anchor" + element[i];
-		switchBrowser(By.id(id));
-		switchBrowser(By.cssSelector("div.action"));
+		for (int i = 0; i < Constants.ElementRetraitBoutique.length; i++) {
+			assertTrue(isElementPresent(By.cssSelector(Constants.ElementRetraitBoutique[i])));
+		}
+		WebElement section = browserStackLocaldriver.findElement(By.className("drop-off-points-content"));
+		List<WebElement> items = section.findElements(By.tagName("delivery-store"));
+		int i = (int) Math.floor(Math.random() * (items.size()));
+		items.get(i).click();
+		browserStackLocaldriver
+				.findElement(By.xpath("//*[@id=\"" + items.get(i).getAttribute("id") + "\"]/div[2]/button")).click();
+		Thread.sleep(5000);
 		waitForElementIsInvisible(By.cssSelector("div[class='spinner']"));
 	}
 
 	@Et("^Choix de l'installation à domicile$")
 	public void installation_a_domicile() throws InterruptedException {
 		mode_livraison();
-		assertEquals("Livraison", browserStackLocaldriver.findElement(By.cssSelector("li.done.active")).getText());
-		switchBrowser(By.xpath("//div/ui-view/subscription-full-delivery/div/ul/li[4]"));
+		typeLivraison(3);
 		waitForElementIsInvisible(By.cssSelector("div[class='spinner']"));
-		annule_modification_adresse();
-		browserStackLocaldriver.findElement(By.cssSelector("span.next")).click();
-		browserStackLocaldriver.findElement(By.cssSelector("span.previous")).click();
-		Thread.sleep(2000);
-	}
 
-	public void annule_modification_adresse() {
-		assertEquals("MyCanal - Souscrire - Livraison", browserStackLocaldriver.getTitle());
-		switchBrowser(By.linkText("Modifier l'adresse"));
-		browserStackLocaldriver.findElement(By.linkText("Annuler")).click();
-		waitForElementIsInvisible(By.cssSelector("div[class='spinner']"));
+		WebElement section = browserStackLocaldriver.findElement(By.xpath(
+				"/html/body/div[2]/ui-view/subscription-full/div/ui-view/subscription-full-appointment/div/div/section/div[2]/ul"));
+		List<WebElement> items = section.findElements(By.tagName("li"));
+		int i = (int) Math.floor(Math.random() * (items.size()));
+		List<WebElement> span = items.get(i)
+				.findElements(By.cssSelector("span.ng-binding.ng-scope.availabilitie.available"));
+		int j = (int) Math.floor(Math.random() * (span.size()));
+		span.get(j).click();
+		switchBrowser(By.cssSelector("button.button.button-primary"));
+		Thread.sleep(2000);
 	}
 }

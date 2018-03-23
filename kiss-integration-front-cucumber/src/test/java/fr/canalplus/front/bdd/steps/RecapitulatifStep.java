@@ -3,6 +3,7 @@ package fr.canalplus.front.bdd.steps;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import cucumber.api.java.fr.Alors;
 import cucumber.api.java.fr.Et;
 import fr.canalplus.front.bdd.steps.base.BaseIntegration;
 import net.serenitybdd.core.annotations.findby.By;
@@ -19,7 +20,7 @@ public class RecapitulatifStep extends BaseIntegration {
 				.findElement(By.xpath("//subscription-full-recap/div/div/recap-products/div[4]/div/div[2]")).getText());
 		assertEquals("Récapitulatif", browserStackLocaldriver.findElement(By.cssSelector("li.done.active")).getText());
 		Thread.sleep(5000);
-		valider();
+		confirmer();
 	}
 
 	@Et("^Récapitulatif de la souscription TNT 24 mois$")
@@ -52,7 +53,7 @@ public class RecapitulatifStep extends BaseIntegration {
 				.findElement(By.xpath("//subscription-full-recap/div/div/recap-products/div[4]/div/div[2]")).getText());
 
 		Thread.sleep(5000);
-		valider();
+		confirmer();
 	}
 
 	@Et("^Récapitulatif de la souscription TNT 12 mois$")
@@ -69,11 +70,20 @@ public class RecapitulatifStep extends BaseIntegration {
 				.getText());
 		assertEquals("Récapitulatif", browserStackLocaldriver.findElement(By.cssSelector("li.done.active")).getText());
 		Thread.sleep(5000);
-		valider();
+		confirmer();
 	}
 
-	@Et("^Validation du recapitulatif du récap matériel <operateur>$")
-	public void page_recapitulatif_fai() throws InterruptedException {
-		valider();
+	@Alors("^Récapitulatif de l'offre$")
+	public void recapitulatif() throws InterruptedException {
+
+		assertEquals("OFFERT", browserStackLocaldriver.findElement(By.cssSelector("span.ng-binding")).getText());
+		assertEquals("Récapitulatif", browserStackLocaldriver.findElement(By.cssSelector("li.done.active")).getText());
+		browserStackLocaldriver.findElement(By.cssSelector("button.button.button-primary")).click();
+		waitForElementIsInvisible(By.cssSelector("div[class='spinner']"));
+	}
+
+	@Et("^Validation du recapitulatif du récap matériel (.*)$")
+	public void page_recapitulatif_fai(String operateur) throws InterruptedException {
+		confirmer();
 	}
 }

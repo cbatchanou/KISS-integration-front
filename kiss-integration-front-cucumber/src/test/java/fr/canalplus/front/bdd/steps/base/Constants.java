@@ -8,12 +8,12 @@ public final class Constants {
 	public static final String DECODEUR_CANAL = "";
 	public static final String DECODEUR_CANAL_CUBE = "";
 	
-	public static final String FAI_BOUYGUES = "";
-	public static final String FAI_FREE = "";
-	public static final String FAI_ORANGE = "";
-	public static final String FAI_SFR = "";
-	public static final String FAI_NUMERICABLE = "";
-	public static final String FAI_AUTRE = "";
+	public static final String BOUYGUES = "div.isp-logo-selector.isp-logo.bouygues";
+	public static final String FREE = "div.isp-logo-selector.isp-logo.free";
+	public static final String ORANGE = "div.isp-logo-selector.isp-logo.orange";
+	public static final String SFR = "div.isp-logo-selector.isp-logo.sfr";
+	public static final String NUMERICABLE = "div.isp-logo-selector.isp-logo.numerica";
+	public static final String AUTRE = "div.isp-logo-selector.isp-logo.vialis";
 	
 	public static final String FAI_SMARTTV = "";
 	public static final String FAI_CARTESAT = "";
@@ -40,26 +40,48 @@ public final class Constants {
 	
 	public static final String PRIX_OFFRE_24CECS = "44,90€";
 	
-	public static final String breadcrum_main="/html/body/div[2]/ui-view/subscription-full/div/breadcrumb/div/div[2]/ul";  
-	public static final String breadcrum_offre="/html/body/div[2]/ui-view/subscription-full/div/breadcrumb/div/div[2]/ul/li[1]";
-	public static final String breadcrum_Materiel="/html/body/div[2]/ui-view/subscription-full/div/breadcrumb/div/div[2]/ul/li[2]";
-	public static final String breadcrum_Coordonnees="/html/body/div[2]/ui-view/subscription-full/div/breadcrumb/div/div[2]/ul/li[3]";
-	public static final String breadcrum_Livraison="/html/body/div[2]/ui-view/subscription-full/div/breadcrumb/div/div[2]/ul/li[4]";
-	public static final String breadcrum_Recapitulatif="/html/body/div[2]/ui-view/subscription-full/div/breadcrumb/div/div[2]/ul/li[5]";
-	public static final String breadcrum_paiement="/html/body/div[2]/ui-view/subscription-full/div/breadcrumb/div/div[2]/ul/li[6]";
+	public static final String breadcrum_main = "/html/body/div[2]/ui-view/subscription-full/div/breadcrumb/div/div[2]/ul";
+	public static final String breadcrum_offre = "/html/body/div[2]/ui-view/subscription-full/div/breadcrumb/div/div[2]/ul/li[1]";
+	public static final String breadcrum_Materiel = "/html/body/div[2]/ui-view/subscription-full/div/breadcrumb/div/div[2]/ul/li[2]";
+	public static final String breadcrum_Coordonnees = "/html/body/div[2]/ui-view/subscription-full/div/breadcrumb/div/div[2]/ul/li[3]";
+	public static final String breadcrum_Livraison = "/html/body/div[2]/ui-view/subscription-full/div/breadcrumb/div/div[2]/ul/li[4]";
+	public static final String breadcrum_Recapitulatif = "/html/body/div[2]/ui-view/subscription-full/div/breadcrumb/div/div[2]/ul/li[5]";
+	public static final String breadcrum_paiement = "/html/body/div[2]/ui-view/subscription-full/div/breadcrumb/div/div[2]/ul/li[6]";
 	
-	public static final String[] elementsPanierflottant = { "div.cart-footer-content", "a.show-modal",
+	public static final String[] elementsPanierflottant = { "div.cart-footer-content", "div.order-summary-link",
 			"span.price-footer" };
 	public static final String[] elementsEntete = { "div.logo", "div.click-call", "div.secured-space" };
 	public static final String[] elementsTNT24 = { "div.visuel", "span.free", "span.guarantee", "h1", "a",
 			"span.price-footer", "a.show-modal", "div.offer-price.offer-price-no-promo" };
-	// "div.offer-price-amount-container", "span.offer-price-promo",
-	// "span;price-footer", "a.show-modal",
-	// "div.offer-reco", "a" };
-	public static final String[] elementsFelication = { "span.firstname", "span.email.strong",
-			"button.button.button-primary" };
+	public static final String[] elementsFelication = { "span.firstname.ng-binding", "span.email.strong.ng-binding",
+			"button.button.button-primary.ng-binding" };
+	public static final String[] ElementFaiBox = { "div.equipment-section__description", "div.isp-group-logo",
+			"div.equipment-section__info",
+			"body > div.ng-scope > div > div > ui-view > div > div:nth-child(4) > div:nth-child(1) > div.equipment-section__header > div > div.equipment-section__reception.ng-scope",
+			"body > div.ng-scope > div > div > ui-view > div > div:nth-child(4) > div:nth-child(1) > div.equipment-section__select-button" };
+	public static final String[] ElementEcransConnectes = { "div.ott-logo",
+			"body > div.ng-scope > div > div > ui-view > div > div:nth-child(4) > div:nth-child(2) > div.equipment-section__select-button",
+			"body > div.ng-scope > div > div > ui-view > div > div:nth-child(4) > div:nth-child(2) > div.equipment-section__select-button" };
+	public static final String[] ElementSmartTV = {
+			"body > div.ng-scope > div > div > ui-view > div > div:nth-child(4) > div:nth-child(3) > div.equipment-section__select-button",
+			"body > div.ng-scope > div > div > ui-view > div > div:nth-child(4) > div:nth-child(3) > div.equipment-section__header > div > div.equipment-section__reception.ng-scope" };
+	public static final String[] ElementDecodeurCanal = { "div.equipment-section__description",
+			"div.equipment-section__picture.satG9", "div.equipment-section__info",
+			"body > div.ng-scope > div > div > ui-view > div > div:nth-child(3) > div:nth-child(1) > div.equipment-section__select-button" };
+	public static final String[] ElementPlusCube = { "div.equipment-section__header",
+			"body > div.ng-scope > div > div > ui-view > div > div:nth-child(3) > div:nth-child(2) > div.equipment-section__select-button" };
+
+	public static final String[] ElementRetraitBoutique = { "div.logo-container", "li.done.active",
+			"div.address-and-link", "p.address", "p.modify-address", "div.drop-off-points-content" };
+
+	public static final String[] ElementLivraisonDomicile = { "div.logo-container", "div.address-bloc",
+			"p.address-link", "h1", "button.button.button-primary" };
+
 	public static final String lienVoirDetail = "/html/body/div[2]/ui-view/subscription-full/footer-cart/section/div/a";
+	public static final String lienModalitesOffre = "div.funnel-step__modalities.ng-scope";
 	public static final String conditionsG = "/html/body/div[2]/ui-view/subscription-full/div/ui-view/subscription-full-auth/div/div/form/div[6]/label/div";
+	public static final String confirmer = "confirm-button";
+
 	public static String generateIban() {
         // TODO: a refaire
         StringBuilder iban = new StringBuilder();

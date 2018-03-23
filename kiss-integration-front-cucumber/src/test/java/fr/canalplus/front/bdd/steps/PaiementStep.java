@@ -2,15 +2,16 @@ package fr.canalplus.front.bdd.steps;
 
 import static org.junit.Assert.assertEquals;
 
-import cucumber.api.java.fr.Et;
+import cucumber.api.java.fr.Alors;
 import fr.canalplus.front.bdd.steps.base.BaseIntegration;
 import fr.canalplus.front.bdd.steps.base.Constants;
 import net.serenitybdd.core.annotations.findby.By;
 
 public class PaiementStep extends BaseIntegration {
 
-	@Et("^Validation du paiement par CB (.*) IBAN$")
+	@Alors("^Validation du paiement par CB (.*) IBAN$")
 	public void page_paiement(String iban) throws InterruptedException {
+		assertEquals("CANAL BOUTIQUE - Paiement", browserStackLocaldriver.getTitle());
 		assertEquals("Paiement", browserStackLocaldriver.findElement(By.cssSelector("li.done.active")).getText());
 		/* IBAN */
 		System.out.println("valeur iban:" + iban.toString());
@@ -30,6 +31,10 @@ public class PaiementStep extends BaseIntegration {
 		browserStackLocaldriver.findElement(By.name("credit-card-cvc")).sendKeys("567");
 
 		click_sur_conditionsGenerales(By.cssSelector("div.control__indicator"));
-		valider();
+		browserStackLocaldriver
+				.findElement(org.openqa.selenium.By.cssSelector("button.button.button-primary.ng-binding")).click();
+		Thread.sleep(5000);
+		// waitForElementIsInvisible(By.cssSelector("div[class='spinner']"));
+		// confirmer();
 	}
 }

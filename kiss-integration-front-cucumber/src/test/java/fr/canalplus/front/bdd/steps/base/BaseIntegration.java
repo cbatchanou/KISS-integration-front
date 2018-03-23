@@ -81,12 +81,6 @@ public abstract class BaseIntegration {
 	@Value("#{'${elements.decodeursCanal}'.split(',')}")
 	public String[] elementsDECC;
 	
-	@Value("#{'${elements.livraisonRetraitBoutique}'.split(',')}")
-	public String[] retrait_boutique; 
-
-	@Value("#{'${elements.livraisonDomicile}'.split(',')}")
-	public String[] livraison_domicile;
-	
 	@Value("#{'${elements.recapitulatif}'.split(',')}")
 	public String[] recapitulatif; 
 
@@ -95,9 +89,6 @@ public abstract class BaseIntegration {
 
 	@Value("${link.decodeurCanal}")
 	public String link_decodeur_canal;
-
-	@Value("${link.modalitesOffre}")
-	public String link_modalite_offre;
 
 	@Value("${materiel.DecodeurCanal}")
 	public String decodeur_canal;
@@ -124,17 +115,38 @@ public abstract class BaseIntegration {
 	}
 	
 	public void waitForElementIsVisible(By by) {
-		WebDriverWait wait = new WebDriverWait(browserStackLocaldriver, 40);
+		WebDriverWait wait = new WebDriverWait(browserStackLocaldriver, 60);
 		wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(by));
 	}
 
-	public void getPageUrl(String propalId) {
+	/*public void getPageUrl(String propalId) {
 		browserStackLocaldriver.manage().deleteAllCookies();
 		browserStackLocaldriver.get(siteCanal.toString());
 		browserStackLocaldriver.get("https://boutique-recette.mycanal.fr/souscrire/offre?propalId=" + propalId);
 		waitForElementIsInvisible(By.cssSelector("div[class='spinner']"));
+	}*/
+	
+	public void getPageUrl() throws InterruptedException {
+		browserStackLocaldriver.manage().deleteAllCookies();
+		browserStackLocaldriver.get(siteCanal.toString());
+		browserStackLocaldriver.get("https://boutique-dev.mycanal.fr/subscribe/offer/select-material/000012242");
+		waitForElementIsInvisible(By.cssSelector("div[class='spinner']"));
+		Thread.sleep(5000);
 	}
 
+	public void getPageUrl(String propalId) throws InterruptedException {
+		browserStackLocaldriver.manage().deleteAllCookies();
+		browserStackLocaldriver
+				.get(siteCanal.toString());
+		if (browserName.equals("chrome")) {
+			browserStackLocaldriver.get("https://boutique-recette.mycanal.fr/souscrire/offre?propalId=" + propalId);
+		} else {
+			browserStackLocaldriver.navigate().to(browserStackLocaldriver.getCurrentUrl());
+		}
+		waitForElementIsInvisible(By.cssSelector("div[class='spinner']"));
+		Thread.sleep(5000);
+	}
+	
 	public void ClearBrowserCache() throws InterruptedException {
 		browserStackLocaldriver.manage().getCookies().clear();
 		browserStackLocaldriver.manage().getCookies();
@@ -153,8 +165,9 @@ public abstract class BaseIntegration {
 	}
 
 
-	public void valider() throws InterruptedException {
-		browserStackLocaldriver.findElement(By.cssSelector(continuer)).click();
+	public void confirmer() throws InterruptedException {
+		// switchBrowser(By.cssSelector(Constants.confirmer));
+		browserStackLocaldriver.findElement(By.className(Constants.confirmer)).click();
 		waitForElementIsInvisible(By.cssSelector("div[class='spinner']"));
 		Thread.sleep(5000);
 	}
@@ -170,22 +183,22 @@ public abstract class BaseIntegration {
 	public String getOperateur(String op) {
 		switch (op.toString()) {
 		case "BOUYGUES":
-			op = bbox;
+			op = Constants.BOUYGUES;
 			break;
 		case "FREE":
-			op = free;
+			op = Constants.FREE;
 			break;
 		case "ORANGE":
-			op = orange;
+			op = Constants.ORANGE;
 			break;
 		case "SFR":
-			op = sfr;
+			op = Constants.SFR;
 			break;
 		case "NUMERICABLE":
-			op = numericable;
+			op = Constants.NUMERICABLE;
 			break;
 		case "AUTRE":
-			op = autre;
+			op = Constants.AUTRE;
 			break;
 		}
 
@@ -201,18 +214,21 @@ public abstract class BaseIntegration {
 	 * */
 
 	public void switchBrowser(By locator) {
-		
+		WebElement element;
+		Actions clickerElement;
 		switch (browserName) {
 		case "chrome":
-			WebElement element = browserStackLocaldriver.findElement(locator);
-			Actions clickerElement = new Actions(browserStackLocaldriver);
+			element = browserStackLocaldriver.findElement(locator);
+			clickerElement = new Actions(browserStackLocaldriver);
 			clickerElement.moveToElement(element, 0, 0).click().perform();
 			break;
 		case "firefox":
 			browserStackLocaldriver.findElement(locator).click();
 			break;
 		case "IE":
-			browserStackLocaldriver.findElement(locator).click();
+			element = browserStackLocaldriver.findElement(locator);
+			clickerElement = new Actions(browserStackLocaldriver);
+			clickerElement.moveToElement(element, 0, 0).click().perform();
 			break;
 		case "safari":
 			browserStackLocaldriver.findElement(locator).click();

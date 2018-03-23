@@ -35,6 +35,16 @@ public class MaterielStep extends BaseIntegration {
 
 	}
 
+	@Etantdonné("^L'ouverture de la page souscription$")
+	public void ouvrir_la_page_souscription() throws InterruptedException {
+		getPageUrl();
+		Thread.sleep(5000);
+		assertEquals("MyCanal - Souscrire - Configuration matériel", browserStackLocaldriver.getTitle());
+		assertEquals("Matériel", browserStackLocaldriver.findElement(By.cssSelector("li.done.active")).getText());
+		Thread.sleep(3000);
+
+	}
+
 	@Etantdonné("^Une offre sans engagement de propalId (.*)$")
 	public void UrlpourSansEngagement(String propalId) throws InterruptedException {
 		getPageUrl(propalId);
@@ -54,9 +64,7 @@ public class MaterielStep extends BaseIntegration {
 
 	@Lorsque("^L'on clique sur le décodeur Canal plus Le Cube$")
 	public void click_sur_Le_Cube() throws InterruptedException, IOException {
-		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 		browserStackLocaldriver.findElement(By.xpath(le_cube)).click();
-		System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
 		waitForElementIsInvisible(By.cssSelector("div[class='spinner']"));
 		assertEquals("MyCanal - Souscrire - Matériel", browserStackLocaldriver.getTitle());
 	}
@@ -100,6 +108,7 @@ public class MaterielStep extends BaseIntegration {
 	@Et("^L'on clique sur jai deja une parabole$")
 	public void click_sur_jai_deja_une_parabole() throws InterruptedException {
 		browserStackLocaldriver.findElement(By.cssSelector("install-selection-button")).click();
+		waitForElementIsInvisible(By.cssSelector("div[class='spinner']"));
 		Thread.sleep(5000);
 	}
 

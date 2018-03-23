@@ -25,7 +25,7 @@ Fonctionnalité: Autmatisation des liens de la boutique
     Lorsque L'on clique sur voir les modalités de loffre et des services
 
   @voirdetail @lien
-  Scénario: Scénario de vérification du lien : Voir le detail 
+  Scénario: Scénario de vérification du lien : Voir le detail
     Etant donné L'ouverture de la page souscription
     Lorsque L'on clique sur voir le detail
 
@@ -36,3 +36,5 @@ Fonctionnalité: Autmatisation des liens de la boutique
     Et Verification des elements presents dans soucription decodeurs canal
     Et L'on clique sur jai deja une parabole
     Alors cliquer sur le lien Identifiez-vous
+
+  
